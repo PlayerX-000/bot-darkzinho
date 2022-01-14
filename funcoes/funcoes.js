@@ -1,5 +1,5 @@
 const { MessageType } = require('@adiwajshing/baileys')
-    
+const {extendedText} = MessageType
 
 /*-----------------------------------------------------------------------*/
 
@@ -57,7 +57,28 @@ const { MessageType } = require('@adiwajshing/baileys')
         const sentMsg  = await conn.sendMessage (id, 'Em desenvolvimento...', MessageType.text)
     }
 
+    
+    const marcar_grupo = async (id, conn, chatUpdate,dd) => {
 
+        const isGroup = id.endsWith('@g.us');
+        const groupMetadata = isGroup ? await conn.groupMetadata(id) : ''
+        const users1 = isGroup ? groupMetadata.participants : ''
+
+        users = [];
+        numeros = '👿MΔRCΔΠDΩ USUΔRIΩS😈 \n \n'
+        contato = ''
+           for(let i of users1) {
+               users.push(i.jid)
+           }
+       users.forEach((ctt,ind)=>{
+          numeros += (`${ind+1}° - `+'@'+ctt.replace("@s.whatsapp.net","")+"\n \n"); 
+          contato += (ctt.replace("@s.whatsapp.net","")+"\n"); 
+       })
+
+      conn.sendMessage(id, numeros, extendedText, { contextInfo: { "mentionedJid": contato } })
+  
+
+}
     const adm_grupo = async (id, conn) => {
 
         const isGroup = id.endsWith('@g.us');
@@ -65,13 +86,19 @@ const { MessageType } = require('@adiwajshing/baileys')
         const users = isGroup ? groupMetadata.participants : ''
 
      adms = [];
+     lista = '👿ΩS ΔDMS ΠΩ GRUPΩ SΔΩ😈 \n \n'
         for(let i of users) {
             i.isAdmin ? adms.push(i.jid) : ''
         }
-        const sentMsg  = await conn.sendMessage (id, adms, MessageType.text)
+    adms.forEach((ctt,ind)=>{
+       lista += (`${ind+1}° - `+ctt.replace("@s.whatsapp.net","")+"\n \n"); 
+    })
+
+
+        const sentMsg  = await conn.sendMessage (id, lista, MessageType.text)
     }
 
 
 /*-----------------------------------------------------------------------*/
 
-    module.exports = { criador , help , ban , adm_grupo }
+    module.exports = { criador , help , ban , adm_grupo , marcar_grupo}

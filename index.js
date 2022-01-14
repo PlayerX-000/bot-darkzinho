@@ -32,6 +32,7 @@ conn.on ('open', () => {
     const authInfo = conn.base64EncodedAuthInfo() // get all the auth info we need to restore this session
     fs.writeFileSync('./auth_info.json', JSON.stringify(authInfo, null, '\t')) // save this info to a file
 })
+
 conn.loadAuthInfo ('./auth_info.json') // will load JSON credentials from file
 await conn.connect ()
 
@@ -52,11 +53,11 @@ if(message.key.remoteJid){
 
     if(message.message.listResponseMessage){
         const list_comando = message.message.listResponseMessage.description;
-        gerencia(list_comando, id, conn)
+        gerencia(list_comando, id, conn, chatUpdate)
         }
         if(message.message.conversation){
         const txt_msg = message.message.conversation;
-        gerencia(txt_msg, id ,conn)
+        gerencia(txt_msg, id ,conn, chatUpdate)
         }
 
 }
