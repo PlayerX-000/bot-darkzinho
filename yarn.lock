@@ -586,7 +586,7 @@
   "resolved" "https://registry.npmjs.org/dateformat/-/dateformat-4.6.3.tgz"
   "version" "4.6.3"
 
-"debug@^4.3.2", "debug@4":
+"debug@^4.3.3", "debug@4":
   "integrity" "sha512-/zxw5+vh1Tfv+4Qn7a5nsbcJKPaSvCDhojn6FEl9vupwK2VCSDtEiEtqr8DFtzYFOdz63LBkxec7DYuc2jon6Q=="
   "resolved" "https://registry.npmjs.org/debug/-/debug-4.3.3.tgz"
   "version" "4.3.3"
@@ -869,12 +869,12 @@
   "version" "2.1.2"
 
 "music-metadata@^7.4.1":
-  "integrity" "sha512-pEaS/vRo0zCAWJ0y5zZ5ruM8CvPPJ/VXbevRMUVkZkWN8rZAQun04xx09/3/PV0qS3nlrzPUDCRK6jDrbGVtUg=="
-  "resolved" "https://registry.npmjs.org/music-metadata/-/music-metadata-7.11.4.tgz"
-  "version" "7.11.4"
+  "integrity" "sha512-4gRRyj1Sg/EIQoPKckFW6U0kxkMvkN+XMcCDGyIegctwyvzVQHqEkXjlNOJf56xRUB69hRRQabiKSW6x6A1zBQ=="
+  "resolved" "https://registry.npmjs.org/music-metadata/-/music-metadata-7.11.6.tgz"
+  "version" "7.11.6"
   dependencies:
     "content-type" "^1.0.4"
-    "debug" "^4.3.2"
+    "debug" "^4.3.3"
     "file-type" "16.5.3"
     "media-typer" "^1.1.0"
     "strtok3" "^6.2.4"

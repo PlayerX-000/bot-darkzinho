@@ -43,7 +43,7 @@ await conn.connect ()
         if (chatUpdate.messages && chatUpdate.count) {
 
             const message = chatUpdate.messages.all()[0]
-            console.log(message.message)
+            console.log(message.message.extendedTextMessage)
             const id = message.key.remoteJid
  
             
