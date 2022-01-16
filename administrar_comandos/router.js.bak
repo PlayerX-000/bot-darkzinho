@@ -20,18 +20,18 @@ array_comandos.adm_grupo = adm_grupo;
 
 /*-----------------------------------------------------------------------*/
 
-  const gerencia = async (msg , id ,conn, chatUpdate) => {
+  const gerencia = async (msg , id ,conn, chatUpdate,numero_cll) => {
 
 const array_msg = msg.split(" ")
 
-  array_msg.forEach((palavras) => {
+  array_msg.forEach((palavras,ind) => {
     if(palavras.substr(0, 1) == "!"){
 
 let comando = palavras.replace("!","")
     if(comandos.includes(`${comando}`)===true){
 
  logs_caht_update(comando , id)
- array_comandos[comando](id, conn, chatUpdate);
+ array_comandos[comando](id, conn, array_msg[ind+1], chatUpdate,numero_cll);
 
 }
  }

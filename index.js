@@ -43,9 +43,9 @@ await conn.connect ()
         if (chatUpdate.messages && chatUpdate.count) {
 
             const message = chatUpdate.messages.all()[0]
-            console.log(message.message.extendedTextMessage)
+     //       console.log(message.message.extendedTextMessage)
             const id = message.key.remoteJid
- 
+            const numero_cll = message.participant
             
 
 
@@ -53,11 +53,11 @@ if(message.key.remoteJid){
 
     if(message.message.listResponseMessage){
         const list_comando = message.message.listResponseMessage.description;
-        gerencia(list_comando, id, conn, chatUpdate)
+        gerencia(list_comando, id, conn, chatUpdate,numero_cll)
         }
         if(message.message.conversation){
         const txt_msg = message.message.conversation;
-        gerencia(txt_msg, id ,conn, chatUpdate)
+        gerencia(txt_msg, id ,conn, chatUpdate,numero_cll)
         }
 
 }

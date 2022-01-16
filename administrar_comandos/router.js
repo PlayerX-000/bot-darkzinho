@@ -1,4 +1,4 @@
-const { help , ban , adm_grupo , marcar_grupo } = require("../funcoes/funcoes.js");
+const { gado , help , ban , adm_grupo , marcar_grupo } = require("../funcoes/funcoes.js");
 const fs = require('fs')
 const comandos = JSON.parse(fs.readFileSync('./funcoes/arrays/comandos.json'))
 let array_comandos = [];
@@ -10,6 +10,8 @@ let array_comandos = [];
 
 
 
+
+array_comandos.gado = gado;
 array_comandos.help = help;
 array_comandos.ban = ban;
 array_comandos.marcar_grupo = marcar_grupo;
@@ -20,7 +22,7 @@ array_comandos.adm_grupo = adm_grupo;
 
 /*-----------------------------------------------------------------------*/
 
-  const gerencia = async (msg , id ,conn, chatUpdate) => {
+  const gerencia = async (msg , id ,conn, chatUpdate,numero_cll) => {
 
 const array_msg = msg.split(" ")
 
@@ -31,7 +33,7 @@ let comando = palavras.replace("!","")
     if(comandos.includes(`${comando}`)===true){
 
  logs_caht_update(comando , id)
- array_comandos[comando](id, conn, array_msg[ind+1], chatUpdate);
+ array_comandos[comando](id, conn, array_msg[ind+1], chatUpdate,numero_cll);
 
 }
  }
