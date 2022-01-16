@@ -1,4 +1,4 @@
-const { gado , help , ban , adm_grupo , marcar_grupo } = require("../funcoes/funcoes.js");
+const { abracar , matar , gay , gado , help , ban , adm_grupo , marcar_grupo } = require("../funcoes/funcoes.js");
 const fs = require('fs')
 const comandos = JSON.parse(fs.readFileSync('./funcoes/arrays/comandos.json'))
 let array_comandos = [];
@@ -8,9 +8,9 @@ let array_comandos = [];
 
 
 
-
-
-
+array_comandos.abracar = abracar;
+array_comandos.matar = matar;
+array_comandos.gay = gay;
 array_comandos.gado = gado;
 array_comandos.help = help;
 array_comandos.ban = ban;

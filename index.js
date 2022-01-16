@@ -1,6 +1,6 @@
 const { WAConnection } = require('@adiwajshing/baileys')
 const fs = require('fs')
-const { gerencia } = require("./administrar_comandos/router.js");
+const { very } = require("./administrar_comandos/verify.js");
 
 
 
@@ -46,18 +46,18 @@ await conn.connect ()
      //       console.log(message.message.extendedTextMessage)
             const id = message.key.remoteJid
             const numero_cll = message.participant
-            
-
+            console.log("---------------------------mensagem nova----------------------")       
+console.log(message.messageTimestamp)
 
 if(message.key.remoteJid){
 
     if(message.message.listResponseMessage){
         const list_comando = message.message.listResponseMessage.description;
-        gerencia(list_comando, id, conn, chatUpdate,numero_cll)
+        very(list_comando, id, conn, chatUpdate,numero_cll)
         }
         if(message.message.conversation){
         const txt_msg = message.message.conversation;
-        gerencia(txt_msg, id ,conn, chatUpdate,numero_cll)
+        very(txt_msg, id ,conn, chatUpdate,numero_cll)
         }
 
 }
