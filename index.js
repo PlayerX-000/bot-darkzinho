@@ -47,17 +47,17 @@ await conn.connect ()
             const id = message.key.remoteJid
             const numero_cll = message.participant
             console.log("---------------------------mensagem nova----------------------")       
-console.log(message.messageTimestamp)
+console.log(message)
 
 if(message.key.remoteJid){
 
     if(message.message.listResponseMessage){
         const list_comando = message.message.listResponseMessage.description;
-        very(list_comando, id, conn, chatUpdate,numero_cll)
+        very(list_comando, id, conn, message,numero_cll)
         }
         if(message.message.conversation){
         const txt_msg = message.message.conversation;
-        very(txt_msg, id ,conn, chatUpdate,numero_cll)
+        very(txt_msg, id ,conn, message,numero_cll)
         }
 
 }
