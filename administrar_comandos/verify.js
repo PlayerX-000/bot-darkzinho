@@ -3,9 +3,16 @@ const { MessageType, Mimetype } = require('@adiwajshing/baileys')
 const fs = require('fs')
 const comandos = JSON.parse(fs.readFileSync('./funcoes/arrays/comandos.json'))
 console.log(comandos)
-let entrada_saida = true
+let entrada_saida = []
 
 
+const boavinda = () => {
+    if(entrada_saida.stats){
+    entrada_saida.stats = false
+    }else{
+        entrada_saida.stats = true
+    }
+}
 
 
 const IO_entrada_saida = async (id,cod,num,conn) => {
@@ -15,14 +22,15 @@ let arrayvar = []
 
 
 const ola = `
-ola ${num.replace("@s.whatsapp.net","")}
-Bem Vindo ao
-${metadata.subject}
+•❤•.¸✿¸.•❤•.❀•𝔹𝕖𝕞-𝕍𝕚𝕟𝕕𝕠•❀.•❤•.¸✿¸.•❤•
+${num.replace("@s.whatsapp.net","")}
+▂▃▅▆▇█ •.❀•𝙎𝙞𝙣𝙩𝙖-𝙩𝙚 𝙀𝙢 𝘾𝙖𝙨𝙖•❀.•█▇▆▅▃▂
+ᴅᴇ ${metadata.subject}
 `
 
 let bye = `
-adeus ${num.replace("@s.whatsapp.net","")}
-ja vai tarde
+𝔸𝕕𝕖𝕦𝕤 @${num.replace("@s.whatsapp.net","")} ℕ𝕌ℕℂ𝔸 𝕞𝕒𝕚𝕤 𝕧𝕠𝕝𝕥𝕖 
+¯\_(⌣̯̀⌣́)_/¯
 `
 
 try{
@@ -32,7 +40,7 @@ try{
     }
 
     console.log("2--------------")
-if(entrada_saida){
+if(entrada_saida.stats==true){
     console.log("3--------------")
  if(cod===31){
             console.log("5--------------");
@@ -80,4 +88,4 @@ const very = async (msg , id ,conn, message,numero_cll,buff) => {
     
     /*-----------------------------------------------------------------------*/
     
-    module.exports = { very , IO_entrada_saida }
+    module.exports = { very , IO_entrada_saida , boavinda }
