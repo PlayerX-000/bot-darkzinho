@@ -1,9 +1,21 @@
 const { WAConnection } = require('@adiwajshing/baileys')
 const fs = require('fs')
-const { very } = require("./administrar_comandos/verify.js");
+const { very , IO_entrada_saida } = require("./administrar_comandos/verify.js");
 
 
+function IO_veri (chtup,conn){
+    if(chtup.messages){
+const cod = chtup.messages.array[0].messageStubType
+const id = chtup.jid
+if(cod==31 || cod==32){
+const jid = chtup.messages.array[0].messageStubParameters
+const num = jid[0]
 
+IO_entrada_saida(id,cod,num,conn)
+console.log("aki ta na func")
+    }
+}
+}
 
 async function connectToWhatsApp () {
     const conn = new WAConnection() 
@@ -51,7 +63,7 @@ try{
             const id = message.key.remoteJid
             const numero_cll = message.participant
             console.log("---------------------------mensagem nova----------------------")       
-console.log(chatUpdate.messages)
+console.log(message)
 
 if(message.key.remoteJid){
 
@@ -71,7 +83,7 @@ if(message.key.remoteJid){
 
 }
 
-        } else console.log (chatUpdate) // see updates (can be archived, pinned etc.)
+        } else console.log("---------------------------chatupdate----------------------"); console.log (chatUpdate); IO_veri(chatUpdate,conn) // see updates (can be archived, pinned etc.)
     })
 
 }
