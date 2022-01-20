@@ -26,15 +26,19 @@ async function connectToWhatsApp () {
     
     
 
-conn.on ('open', () => {
-    // save credentials whenever updated
-    console.log (`credentials updated!`)
-    const authInfo = conn.base64EncodedAuthInfo() // get all the auth info we need to restore this session
-    fs.writeFileSync('./auth_info.json', JSON.stringify(authInfo, null, '\t')) // save this info to a file
-})
+try{
+    conn.on ('open', () => {
+        console.log (`credentials updated!`)
+        const authInfo = conn.base64EncodedAuthInfo() 
+        fs.writeFileSync('./auth_info.json', JSON.stringify(authInfo, null, '\t')) 
+        })
+    conn.loadAuthInfo ('./auth_info.json') 
+    await conn.connect ()
+}catch{
+    await conn.connect ()
+}
 
-conn.loadAuthInfo ('./auth_info.json') // will load JSON credentials from file
-await conn.connect ()
+
 
 
     conn.on('chat-update', chatUpdate => {
@@ -47,7 +51,7 @@ await conn.connect ()
             const id = message.key.remoteJid
             const numero_cll = message.participant
             console.log("---------------------------mensagem nova----------------------")       
-console.log(message)
+console.log(chatUpdate.messages)
 
 if(message.key.remoteJid){
 
@@ -58,6 +62,11 @@ if(message.key.remoteJid){
         if(message.message.conversation){
         const txt_msg = message.message.conversation;
         very(txt_msg, id ,conn, message,numero_cll)
+        }
+        if(message.message.extendedTextMessage){
+            const buff = message.message.extendedTextMessage
+            const txt_msg = message.message.extendedTextMessage.text
+            very(txt_msg, id ,conn, message,numero_cll,buff)
         }
 
 }

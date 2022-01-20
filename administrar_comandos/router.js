@@ -1,4 +1,4 @@
-const { abracar , matar , gay , gado , help , ban , adm_grupo , marcar_grupo } = require("../funcoes/funcoes.js");
+const { converter , abracar , matar , gay , gado , help , ban , adm_grupo , marcar_grupo } = require("../funcoes/funcoes.js");
 const fs = require('fs')
 const comandos = JSON.parse(fs.readFileSync('./funcoes/arrays/comandos.json'))
 let array_comandos = [];
@@ -7,7 +7,7 @@ let array_comandos = [];
 
 
 
-
+array_comandos.converter = converter;
 array_comandos.abracar = abracar;
 array_comandos.matar = matar;
 array_comandos.gay = gay;
@@ -22,7 +22,7 @@ array_comandos.adm_grupo = adm_grupo;
 
 /*-----------------------------------------------------------------------*/
 
-  const gerencia = async (msg , id ,conn, chatUpdate,numero_cll) => {
+  const gerencia = async (msg , id ,conn, chatUpdate,numero_cll,buff) => {
 
 const array_msg = msg.split(" ")
 

@@ -7,7 +7,7 @@ let array_comados = []
 
 
 
-const very = async (msg , id ,conn, message,numero_cll) => {
+const very = async (msg , id ,conn, message,numero_cll,buff) => {
     const comando_c2 = msg.replace("!","").split(" ")
     const grupo = id.endsWith('@g.us');
     const privado = id.endsWith('@s.whatsapp.net');
@@ -18,7 +18,7 @@ const very = async (msg , id ,conn, message,numero_cll) => {
 
 
     if(grupo===true){
-    gerencia(msg , id ,conn, message,numero_cll)
+    gerencia(msg , id ,conn, message,numero_cll,buff)
     }else 
     if(privado===true){
         if(comandos.includes(`${comando_c2}`)===true){
