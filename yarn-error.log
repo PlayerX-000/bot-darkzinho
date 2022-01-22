@@ -1,21 +1,20 @@
 Arguments: 
-  /home/familia/.nvm/versions/node/v16.13.1/bin/node /usr/local/bin/yarn add @adiwajshing/baileys
+  /data/data/com.termux/files/usr/bin/node /data/data/com.termux/files/usr/share/yarn/bin/yarn.js add fluent-ffmpeg
 
 PATH: 
-  /home/familia/.nvm/versions/node/v16.13.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+  /data/data/com.termux/files/usr/bin:/data/data/com.termux/files/usr/bin/applets:/system/bin:/system/xbin:/sbin:/sbin/bin
 
 Yarn version: 
   1.22.17
 
 Node version: 
-  16.13.1
+  17.4.0
 
 Platform: 
-  linux x64
+  android arm
 
 Trace: 
-  Error: getaddrinfo EAI_AGAIN registry.yarnpkg.com
-      at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:71:26)
+  Error: ENOSYS: function not implemented, symlink '../../../../pino/bin.js' -> '/storage/emulated/0/progetos/bot-darkzinho/node_modules/@adiwajshing/baileys/node_modules/.bin/pino'
 
 npm manifest: 
   {
@@ -24,7 +23,7 @@ npm manifest:
     "description": "bot de whatsapp",
     "main": "index.js",
     "scripts": {
-     "start": "node index.js"
+      "start": "node index.js"
     },
     "keywords": [
       "bot",
@@ -632,7 +631,7 @@ Lockfile:
     "resolved" "https://registry.npmjs.org/dateformat/-/dateformat-4.6.3.tgz"
     "version" "4.6.3"
   
-  "debug@^4.3.2", "debug@4":
+  "debug@^4.3.3", "debug@4":
     "integrity" "sha512-/zxw5+vh1Tfv+4Qn7a5nsbcJKPaSvCDhojn6FEl9vupwK2VCSDtEiEtqr8DFtzYFOdz63LBkxec7DYuc2jon6Q=="
     "resolved" "https://registry.npmjs.org/debug/-/debug-4.3.3.tgz"
     "version" "4.3.3"
@@ -915,12 +914,12 @@ Lockfile:
     "version" "2.1.2"
   
   "music-metadata@^7.4.1":
-    "integrity" "sha512-pEaS/vRo0zCAWJ0y5zZ5ruM8CvPPJ/VXbevRMUVkZkWN8rZAQun04xx09/3/PV0qS3nlrzPUDCRK6jDrbGVtUg=="
-    "resolved" "https://registry.npmjs.org/music-metadata/-/music-metadata-7.11.4.tgz"
-    "version" "7.11.4"
+    "integrity" "sha512-4gRRyj1Sg/EIQoPKckFW6U0kxkMvkN+XMcCDGyIegctwyvzVQHqEkXjlNOJf56xRUB69hRRQabiKSW6x6A1zBQ=="
+    "resolved" "https://registry.npmjs.org/music-metadata/-/music-metadata-7.11.6.tgz"
+    "version" "7.11.6"
     dependencies:
       "content-type" "^1.0.4"
-      "debug" "^4.3.2"
+      "debug" "^4.3.3"
       "file-type" "16.5.3"
       "media-typer" "^1.1.0"
       "strtok3" "^6.2.4"
@@ -1212,6 +1211,18 @@ Lockfile:
     "integrity" "sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8="
     "resolved" "https://registry.npmjs.org/util-deprecate/-/util-deprecate-1.0.2.tgz"
     "version" "1.0.2"
+  
+  "uuid@^8.3.2":
+    "integrity" "sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg=="
+    "resolved" "https://registry.npmjs.org/uuid/-/uuid-8.3.2.tgz"
+    "version" "8.3.2"
+  
+  "webp-converter@^2.3.3":
+    "integrity" "sha512-2p4XvPCIQ/CbUztEFA9vdkILVrRTdMtMxFpQTxlnPc3qx14MV5wnpVvK7m6pG70QdeL+Ser0+Tp843ONwh8VbQ=="
+    "resolved" "https://registry.npmjs.org/webp-converter/-/webp-converter-2.3.3.tgz"
+    "version" "2.3.3"
+    dependencies:
+      "uuid" "^8.3.2"
   
   "wrappy@1":
     "integrity" "sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8="

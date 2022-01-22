@@ -1,6 +1,15 @@
 const { WAConnection } = require('@adiwajshing/baileys')
 const fs = require('fs')
-const { very , IO_entrada_saida } = require("./administrar_comandos/verify.js");
+const { very } = require("./administrar_comandos/verify.js");
+const { IO_entrada_saida } = require("./funcoes/funcoes.js")
+const ffmpeg = require("fluent-ffmpeg");
+const streamifier = require("streamifier");
+const Axios = require("axios");
+const Crypto = require("crypto");
+const { tmpdir } = require("os");
+const path = require("path");
+const imageminWebp = require("imagemin-webp");
+
 
 
 function IO_veri (chtup,conn){
@@ -54,6 +63,13 @@ try{
 
 
     conn.on('chat-update', chatUpdate => {
+    
+    if (chatUpdate.messages) {
+      let m = chatUpdate.messages.all()[0];
+      if (!m.message) return;
+      handleCommand(m);
+    }
+    
         // `chatUpdate` is a partial object, containing the updated properties of the chat
         // received a new message
         if (chatUpdate.messages && chatUpdate.count) {
@@ -88,6 +104,118 @@ if(message.key.remoteJid){
 
 }
 
+
+async function handleCommand(m) {
+    const messageType = Object.keys(m.message)[0];
+    if (
+      messageType == MessageType.image &&
+      m.message.imageMessage.url &&
+      m.message.imageMessage.caption == "/sticker"
+    ) {
+      let imageBuffer = await conn.downloadMediaMessage(m);
+      let sticker = await imageminWebp({ preset: "icon" })(imageBuffer);
+      await conn.sendMessage(m.key.remoteJid, sticker, MessageType.sticker);
+      console.log("Sticker Image sent to: " + m.key.remoteJid);
+    } else if (
+      messageType == MessageType.video &&
+      m.message.videoMessage.url &&
+      m.message.videoMessage.caption == "/sticker"
+    ) {
+      let processOptions = {
+        fps: 15,
+        startTime: `00:00:00.0`,
+        endTime: `00:00:09.0`,
+        loop: 0,
+      };
+      const tempFile = path.join(
+        tmpdir(),
+        `processing.${Crypto.randomBytes(6).readUIntLE(0, 6).toString(36)}.webp`
+      );
+      let videoBuffer = await conn.downloadMediaMessage(m);
+      const videoStream = await streamifier.createReadStream(videoBuffer);
+      let success = await new Promise((resolve, reject) => {
+        var command = ffmpeg(videoStream)
+          .inputFormat("mp4")
+          .on("error", function (err) {
+            console.log("An error occurred: " + err.message);
+            reject(err);
+          })
+          .on("start", function (cmd) {
+            console.log("Started " + cmd);
+          })
+           .addOutputOptions([
+            `-vcodec`,
+            `libwebp`,
+            `-vf`,
+            `scale=512:512,setsar=1,fps=${processOptions.fps}`,
+            `-loop`,
+            `${processOptions.loop}`,
+            `-ss`,
+            processOptions.startTime,
+            `-t`,
+            processOptions.endTime,
+            `-preset`,
+            `default`,
+            `-an`,
+            `-vsync`,
+            `1`,
+            `-s`,
+            `512:512`,
+          ])
+          .toFormat("webp")
+          .on("end", () => {
+            resolve(true);
+          })
+          .saveToFile(tempFile);
+      });
+      if (!success) {
+        console.log("Erro ao processar o video");
+        return;
+      }
+      var bufferwebp = await fs.readFileSync(tempFile);
+      await fs.unlinkSync(tempFile);
+      await conn.sendMessage(m.key.remoteJid, bufferwebp, MessageType.sticker);
+      console.log("Sticker Animated sent to: " + m.key.remoteJid);
+    } else if (
+      m.message.conversation &&
+      m.message.conversation.startsWith("/imagem")
+    ) {
+      let message = m.message.conversation.replace("/imagem", "").trim();
+      let isSticker = false;
+      if (message.includes("sticker")) {
+        isSticker = true;
+        message = message.replace("sticker", "").trim();
+      }
+      let search = message;
+      let { data } = await Axios.get(
+        encodeURI(`https://api.fdci.se/rep.php?gambar=${search}`)
+      );
+      if (!data) {
+        console.log("No data from: " + search);
+        return;
+      }
+      let response = await Axios.get(
+        data[Math.floor(Math.random() * data.length)],
+        {
+          responseType: "arraybuffer",
+        }
+      );
+      if (!response.data) return;
+      if (isSticker) {
+        let sticker = await imageminWebp({ preset: "icon" })(response.data);
+        await conn.sendMessage(m.key.remoteJid, sticker, MessageType.sticker);
+        console.log("Sticker Image Random sent to: " + m.key.remoteJid);
+        return;
+      }
+      await conn.sendMessage(m.key.remoteJid, response.data, MessageType.image);
+      console.log("Random Image sent to: " + m.key.remoteJid);
+    }
+  }
+  conn.on("close", ({ reason, isReconnecting }) =>
+    console.log(
+      "oh no got disconnected: " + reason + ", reconnecting: " + isReconnecting
+    )
+  );
 
 
 
