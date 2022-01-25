@@ -1,20 +1,26 @@
-const { WAConnection } = require('@adiwajshing/baileys')
-const fs = require('fs')
-const { very } = require("./administrar_comandos/verify.js");
-const { IO_entrada_saida } = require("./funcoes/funcoes.js")
-const ffmpeg = require("fluent-ffmpeg");
-const streamifier = require("streamifier");
-const Axios = require("axios");
-const Crypto = require("crypto");
-const { tmpdir } = require("os");
-const path = require("path");
-const imageminWebp = require("imagemin-webp");
+const sharp = require('sharp');
+const funcbai = require('@adiwajshing/baileys');
+const { writeFile } =require('fs/promises')
+const fs =require('fs')
+const { very }  =require("./administrar_comandos/verify.js")
+const { IO_entrada_saida } =require("./funcoes/funcoes.js")
+
+
+const { Sticker, createSticker, StickerTypes } =require( 'wa-sticker-formatter' )// ES6
 
 
 
 function IO_veri (chtup,conn){
+console.log("virificar #@#@#@##@#@#@##@#@")
     if(chtup.messages){
+    
+    let m = chtup.messages.all()[0];
+    
+      
+    
+    
 const cod = chtup.messages.array[0].messageStubType
+console.log(cod)
 const id = chtup.jid
 if(cod==31 || cod==32){
 const jid = chtup.messages.array[0].messageStubParameters
@@ -22,12 +28,17 @@ const num = jid[0]
 
 IO_entrada_saida(id,cod,num,conn)
 console.log("aki ta na func")
-    }
+    }else if (!m.message){
+    return;
+    }else{ 
+     let h = chtup.messages.all()[0];
+    handleCommand(h,conn);
+      }
 }
 }
 
 async function connectToWhatsApp () {
-    const conn = new WAConnection() 
+    const conn = new funcbai.WAConnection() 
   
 
     // called when WA sends chats
@@ -64,11 +75,7 @@ try{
 
     conn.on('chat-update', chatUpdate => {
     
-    if (chatUpdate.messages) {
-      let m = chatUpdate.messages.all()[0];
-      if (!m.message) return;
-      handleCommand(m);
-    }
+    
     
         // `chatUpdate` is a partial object, containing the updated properties of the chat
         // received a new message
@@ -102,24 +109,91 @@ if(message.key.remoteJid){
         } else console.log("---------------------------chatupdate----------------------"); console.log (chatUpdate); IO_veri(chatUpdate,conn) // see updates (can be archived, pinned etc.)
     })
 
+
+
+
+
+  
+  
+  
+  
+  
+  conn.on("close", ({ reason, isReconnecting }) =>
+    console.log(
+      "oh no got disconnected: " + reason + ", reconnecting: " + isReconnecting
+    )
+  );
 }
 
+async function handleCommand(m,conn) {
 
-async function handleCommand(m) {
+
+
+
+
+
     const messageType = Object.keys(m.message)[0];
     if (
-      messageType == MessageType.image &&
+      messageType == funcbai.MessageType.image &&
       m.message.imageMessage.url &&
-      m.message.imageMessage.caption == "/sticker"
+      m.message.imageMessage.caption == ".s"
     ) {
-      let imageBuffer = await conn.downloadMediaMessage(m);
-      let sticker = await imageminWebp({ preset: "icon" })(imageBuffer);
-      await conn.sendMessage(m.key.remoteJid, sticker, MessageType.sticker);
+   
+    let buffer = Buffer.from([])
+          
+            console.log("aki esta o Mmmmmmm______1")
+          
+         const stream = await funcbai.decryptMediaMessageBuffer(m.message,'dawnloadmeu').then(async(res)=>{
+         
+      
+        for await(const chunk of res) {
+            buffer = Buffer.concat([buffer, chunk])
+        }
+         
+         console.log(buffer)
+         })
+      console.log("aki esta o Mmmmmmm______2")
+      console.log(stream)
+          console.log("aki esta o Mmmmmmm______3")
+       
+          const buffer_s = await createSticker(buffer, {
+            pack: 'My Pack', 
+            author: 'Me', 
+            type: StickerTypes.FULL,
+            categories: ['🤩', '🎉'],
+            id: '12345', 
+            quality: 50, 
+            background: '#000000' })
+        
+        // or save to file
+   
+        
+        // or get Baileys-MD Compatible Object
+        
+
+     await conn.sendMessage(m.key.remoteJid,buffer_s ,funcbai.MessageType.sticker, { mimetype: funcbai.Mimetype.webp})
+
+        
+        // save to file
+     
+
+        
+        
+       
+    
+    
+    
+    
+
+	console.log('Images optimized');
+
+
+      
       console.log("Sticker Image sent to: " + m.key.remoteJid);
     } else if (
-      messageType == MessageType.video &&
+      messageType == funcbai.MessageType.video &&
       m.message.videoMessage.url &&
-      m.message.videoMessage.caption == "/sticker"
+      m.message.videoMessage.caption == ".s"
     ) {
       let processOptions = {
         fps: 15,
@@ -211,14 +285,7 @@ async function handleCommand(m) {
       console.log("Random Image sent to: " + m.key.remoteJid);
     }
   }
-  conn.on("close", ({ reason, isReconnecting }) =>
-    console.log(
-      "oh no got disconnected: " + reason + ", reconnecting: " + isReconnecting
-    )
-  );
-
-
-
+  
 
 // run in main file
 connectToWhatsApp ()
@@ -226,4 +293,3 @@ connectToWhatsApp ()
 
 
 //send message
-

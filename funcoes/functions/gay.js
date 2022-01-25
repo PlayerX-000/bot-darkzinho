@@ -78,10 +78,10 @@ nome_s.push(users[escolhido])
            
     
     const txt_gay = `
-   🌈⎨⊷⊷⊶⊶GAY⊷⊶⊷⊷�?
+   🌈⎨⊷⊷⊶⊶GAY⊷⊶⊷⊷�?
    🌈⎨⊷.⊷⊶⊷⊶⊷⊶⊷⊶⊷⊶
-   🌈�?>Veja o quão gay o/a
-   🌈�?>${nome_esc.nome} é:
+   🌈�?>Veja o quão gay o/a
+   🌈�?>${nome_esc.nome} é:
    🌈⎨⊶.⊷⊷⊷⊷(${porc}%)⊶⊷⊷⊷
     `
            
