@@ -1,13 +1,12 @@
-const { boas_vindas , converter , abracar , matar , gay , gado , help , ban , adm_grupo , marcar_grupo } = require("../funcoes/funcoes.js");
+const { boas_vindas , s , abracar , matar , gay , gado , help , ban , adm_grupo , marcar_grupo } = require("../funcoes/funcoes.js");
 const fs = require('fs')
 const comandos = JSON.parse(fs.readFileSync('./funcoes/arrays/comandos.json'))
 let array_comandos = [];
 
 /*-----------------------------------------------------------------------*/
 
-
+array_comandos.s = s;
 array_comandos.boas_vindas = boas_vindas;
-array_comandos.converter = converter;
 array_comandos.abracar = abracar;
 array_comandos.matar = matar;
 array_comandos.gay = gay;
@@ -22,7 +21,7 @@ array_comandos.adm_grupo = adm_grupo;
 
 /*-----------------------------------------------------------------------*/
 
-  const gerencia = async (msg , id ,conn, chatUpdate,numero_cll,buff) => {
+  const gerencia = async (msg , id ,conn, message,numero_cll) => {
 
 const array_msg = msg.split(" ")
 
@@ -33,7 +32,7 @@ let comando = palavras.replace("!","")
     if(comandos.includes(`${comando}`)===true){
 
  logs_caht_update(comando , id)
- array_comandos[comando](id, conn, array_msg[ind+1], chatUpdate,numero_cll);
+ array_comandos[comando](id, conn, array_msg[ind+1], message,numero_cll);
 
 }
  }
