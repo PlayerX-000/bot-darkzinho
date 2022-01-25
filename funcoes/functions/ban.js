@@ -1,4 +1,5 @@
 const { MessageType, MessageOptions, Mimetype } = require('@adiwajshing/baileys')
+const { executionAsyncResource } = require('async_hooks')
 const {extendedText} = MessageType
 const fs = require('fs')
 const comandos = JSON.parse(fs.readFileSync('./funcoes/arrays/comandos.json'))
@@ -91,15 +92,22 @@ arrayvar.ppUrl = "https://github.com/PlayerX-000/bot-darkzinho/blob/sec/images.j
 `
    
     
-    adms.forEach(async(ctt,ind)=>{
-    
-    if(ctt== numero_adm ){
-    
+    if((adms.includes(`${numero_adm}`))===true){
+      executor(conn,id,num_ban,txt_ban,arrayvar)
+    }else{
+
+      await conn.sendMessage(id, "Você não é um Administrator",MessageType.text)   
+    }
+  
+  }
+
+async function executor(conn,id,num_ban,txt_ban,arrayvar){
+   
+
  await conn.sendMessage(id, { url: arrayvar.ppUrl },MessageType.image, { mimetype: Mimetype.jpeg, caption: txt_ban,contextInfo: { "mentionedJid": [num_ban] } })
-ctt_ban.push(num_ban)
- await conn.groupRemove(id, ctt_ban)      
+ ctt_ban.push(num_ban)
+  await conn.groupRemove(id, ctt_ban)      
 
+ 
 }
-})}
-
     module.exports = { ban }
