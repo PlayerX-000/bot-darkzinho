@@ -83,15 +83,21 @@ console.log(message)
   const messageType = Object.keys(message.message)[0];
 
 
-  if( messageType == funcbai.MessageType.image &&
+  if(
+    messageType == funcbai.MessageType.image &&
     message.message.imageMessage.url &&
     message.message.imageMessage.caption=='!s'
     ){
 console.log("entro 00a")
   const msg = message.message.imageMessage.caption
   very( msg, id ,conn, message, 0 )// see updates (can be archived, pinned etc.)
-
-  
+}else if(
+    messageType == funcbai.MessageType.video && 
+    message.message.videoMessage.url &&
+    message.message.videoMessage.caption=='!s'
+){
+    const msg = message.message.videoMessage.caption
+    very( msg, id ,conn, message, 0 )// see updates (can be archived, pinned etc.)   
 }
 
 
