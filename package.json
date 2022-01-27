@@ -1,5 +1,5 @@
 {
-  "name": "bot-zap",
+  "name": "Bot-DarkZinho_Itachi",
   "version": "0.0.1",
   "description": "bot de whatsapp",
   "main": "index.js",
@@ -15,11 +15,5 @@
   "author": "Darkzinho_itachi",
   "license": "ISC",
   "dependencies": {
-    "@adiwajshing/baileys": "^3.5.3",
-    "axios": "^0.25.0",
-    "fluent-ffmpeg": "^2.1.2",
-    "qrcode-terminal": "^0.12.0",
-    "streamifier": "^0.1.1",
-    "wa-sticker-formatter": "^4.2.0"
   }
 }
