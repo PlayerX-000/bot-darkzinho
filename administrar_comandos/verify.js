@@ -1,8 +1,8 @@
 const { gerencia } = require("./router.js");
 const { MessageType } = require('@adiwajshing/baileys')
 const fs = require('fs')
-const comandos = JSON.parse(fs.readFileSync('./funcoes/arrays/comandos.json'))
-const  antlink_v  = require("./link")
+const comandos = JSON.parse(fs.readFileSync('./db/comandos/comandos.json'))
+const  antlink_v  = require("../lib/functions/IO_antlink")
 
 
 
