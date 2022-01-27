@@ -1,8 +1,8 @@
 const { gerencia } = require("./router.js");
-const { MessageType, Mimetype } = require('@adiwajshing/baileys')
+const { MessageType } = require('@adiwajshing/baileys')
 const fs = require('fs')
 const comandos = JSON.parse(fs.readFileSync('./funcoes/arrays/comandos.json'))
-const  antlink  = require("./link")
+const  antlink_v  = require("./link")
 
 
 
@@ -13,9 +13,15 @@ const very = async (msg , id ,conn, message,numero_cll) => {
  
 
     if(grupo===true){
-
-       if(!await antlink(message)){
+const isLink = await antlink_v(message)
+       if(isLink){
         const sentMsg  = await conn.sendMessage (id, 'sem link', MessageType.text)
+
+        if(message.participant){
+        gerencia("!ban "+(message.participant).replace("@s.whatsapp.net","") , id ,conn, message,"5512991130663@s.whatsapp.net")
+        }else if(message.message.participant){
+            gerencia("!ban "+(message.message.participant).replace("@s.whatsapp.net","") , id ,conn, message,"5512991130663@s.whatsapp.net")
+        }
        }
 
     gerencia(msg , id ,conn, message,numero_cll)

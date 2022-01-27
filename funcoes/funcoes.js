@@ -1,5 +1,5 @@
 ﻿
-
+const { antlink } = require("./functions/antlink.js")
 const { IO_entrada_saida } = require("./functions/IO_entrada_saida.js")
 const { boas_vindas } = require("./functions/boas_vindas.js")
 const { s } = require("./functions/s.js")
@@ -16,4 +16,4 @@ const { marcar_grupo } = require("./functions/marcar_grupo.js")
 
 /*-----------------------------------------------------------------------*/
 
-    module.exports = { IO_entrada_saida , boas_vindas , s , abracar , matar , gay , gado , help , ban , adm_grupo , marcar_grupo}
+    module.exports = { antlink , IO_entrada_saida , boas_vindas , s , abracar , matar , gay , gado , help , ban , adm_grupo , marcar_grupo}

@@ -6,6 +6,7 @@ const comandos = JSON.parse(fs.readFileSync('./funcoes/arrays/comandos.json'))
 const { readFile } = require('fs/promises')
 
 
+let ctt_ban = []
 
 const ban = async (id,conn,num,chatupdate, numero_cll) => {
        
@@ -23,7 +24,7 @@ const ban = async (id,conn,num,chatupdate, numero_cll) => {
             i.isAdmin ? adms.push(i.jid.replace("@s.whatsapp.net","")) : ''
         }
  const numero=[]
-let ctt_ban = []
+
  const numero_adm = numero_cll.replace("@s.whatsapp.net","")
 console.log(users_grp)
 if(num=="@"){

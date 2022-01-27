@@ -1,6 +1,0 @@
-const converter = async (id,conn) => {
-
-}
-
-
-module.exports = { converter }

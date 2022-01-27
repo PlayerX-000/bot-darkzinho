@@ -1,10 +1,12 @@
-const { boas_vindas , s , abracar , matar , gay , gado , help , ban , adm_grupo , marcar_grupo } = require("../funcoes/funcoes.js");
+const { antlink , boas_vindas , s , abracar , matar , gay , gado , help , ban , adm_grupo , marcar_grupo } = require("../funcoes/funcoes.js");
 const fs = require('fs')
 const comandos = JSON.parse(fs.readFileSync('./funcoes/arrays/comandos.json'))
 let array_comandos = [];
 
 /*-----------------------------------------------------------------------*/
 
+
+array_comandos.antlink = antlink;
 array_comandos.s = s;
 array_comandos.boas_vindas = boas_vindas;
 array_comandos.abracar = abracar;
@@ -46,7 +48,7 @@ function logs_caht_update(msg , id){
 
   console.log("mensagem enviada: \n" + msg)
   console.log("-----------------------------------------")
-  console.log("id do user: \n"+id)
+  console.log("id do grupo: \n"+id)
   
       }
       

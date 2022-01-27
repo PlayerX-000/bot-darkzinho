@@ -11,7 +11,7 @@ const { readFile } = require('fs/promises')
 
 
 let entrada_saida = []
-
+let Antlink = []
 
 
 
@@ -35,6 +35,18 @@ if(state=="off"){
 }
 
 
+const on_off_antlink = async(id,conn,state) =>{
+  if(state=="off"){
+    Antlink.stats = false
+        const sentMsg  = await conn.sendMessage (id, 'Ant Link: OFF', MessageType.text)
+      }else if(state=="on"){
+        Antlink.stats = true
+            const sentMsg  = await conn.sendMessage (id, 'Ant Link: ON', MessageType.text)
+      }else{
+        Antlink.stats = false
+      console.log("ant link off")
+      }
+  }
 
 
 
@@ -43,5 +55,6 @@ if(state=="off"){
 
 
 
+on_off_antlink()
 on_off_bemvindo()
-module.exports = { entrada_saida , on_off_bemvindo }
+module.exports = { entrada_saida , on_off_bemvindo , Antlink , on_off_antlink }

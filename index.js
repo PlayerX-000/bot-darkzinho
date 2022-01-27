@@ -8,7 +8,7 @@ const { IO_entrada_saida } =require("./funcoes/funcoes.js")
 
 
 function IO_veri (chtup,conn){
-console.log("virificar #@#@#@##@#@#@##@#@")
+
     if(chtup.messages){
 
       
@@ -22,7 +22,6 @@ const jid = chtup.messages.array[0].messageStubParameters
 const num = jid[0]
 
 IO_entrada_saida(id,cod,num,conn)
-console.log("aki ta na func")
     }
 }
 }
@@ -122,7 +121,7 @@ if(message.key.remoteJid){
         } else {
           console.log("---------------------------chatupdate----------------------"); 
           console.log (chatUpdate);
-
+          IO_veri(chatUpdate,conn)
       }
   })
 
