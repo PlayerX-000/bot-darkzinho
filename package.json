@@ -17,6 +17,8 @@
   "dependencies": {
     "@adiwajshing/baileys": "^3.5.3",
     "axios": "^0.25.0",
+    "ffprobe": "^1.1.2",
+    "ffprobe-static": "^3.0.0",
     "fluent-ffmpeg": "^2.1.2",
     "i": "^0.3.7",
     "npm": "^8.4.0",
