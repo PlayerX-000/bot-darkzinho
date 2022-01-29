@@ -25,7 +25,7 @@ array_comandos.adm_grupo = adm_grupo;
 /*-----------------------------------------------------------------------*/
 
   const gerencia = async (msg , id ,conn, message,numero_cll) => {
-
+console.log(message)
 const array_msg = msg.split(" ")
 
   array_msg.forEach((palavras,ind) => {
@@ -45,12 +45,11 @@ let comando = palavras.replace("!","")
 /*-----------------------------------------------------------------------*/
 
 //exibe logs, somente no pv do bot ou no grupo em que o bot esta
-function logs_caht_update(msg , id){
+function logs_caht_update(msg , id,m){
 
   console.log("mensagem enviada: \n" + msg)
   console.log("-----------------------------------------")
   console.log("id do grupo: \n"+id)
-  
       }
       
 /*-----------------------------------------------------------------------*/
