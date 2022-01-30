@@ -1,4 +1,4 @@
-const { clear , antlink , boas_vindas , s , abracar , matar , gay , gado , help , ban , adm_grupo , marcar_grupo } = require("../lib/routes/caminhos.js");
+const { clear , antlink , boas_vindas , s , abraçar , matar , gay , gado , help , ban , adm_grupo , marcar_grupo } = require("../lib/routes/caminhos.js");
 const fs = require('fs')
 const comandos = JSON.parse(fs.readFileSync('./db/comandos/comandos.json'))
 let array_comandos = [];
@@ -10,7 +10,7 @@ array_comandos.clear = clear;
 array_comandos.antlink = antlink;
 array_comandos.s = s;
 array_comandos.boas_vindas = boas_vindas;
-array_comandos.abracar = abracar;
+array_comandos.abraçar = abraçar;
 array_comandos.matar = matar;
 array_comandos.gay = gay;
 array_comandos.gado = gado;
