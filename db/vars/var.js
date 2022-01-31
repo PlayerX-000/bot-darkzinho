@@ -3,6 +3,8 @@ const {extendedText} = MessageType
 const fs = require('fs')
 const comandos = JSON.parse(fs.readFileSync('./db/comandos/comandos.json'))
 const { readFile } = require('fs/promises')
+const tb = require('terminal-banner').terminalBanner
+
 
 
 
@@ -30,7 +32,7 @@ if(state=="off"){
           const sentMsg  = await conn.sendMessage (id, 'Boas Vindas: ON', MessageType.text)
     }else{
     entrada_saida.stats = false
-    console.log("boa vinda off")
+  tb('\u001b[34m Boas vindas: OFF')
     }
 }
 
@@ -44,7 +46,7 @@ const on_off_antlink = async(id,conn,state) =>{
             const sentMsg  = await conn.sendMessage (id, 'Ant Link: ON', MessageType.text)
       }else{
         Antlink.stats = false
-      console.log("ant link off")
+      tb('\u001b[34m Anti link: OFF')
       }
   }
 

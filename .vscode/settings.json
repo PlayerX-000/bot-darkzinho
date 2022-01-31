@@ -1,0 +1,12 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "DB_BOT_DARKZINHO",
+            "database": "${workspaceFolder:bot-darkzinho}/db/database/Bot.sqlite",
+            "group": "bot"
+        }
+    ],
+    "sqltools.useNodeRuntime": true
+}
