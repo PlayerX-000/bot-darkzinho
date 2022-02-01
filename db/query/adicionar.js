@@ -26,14 +26,17 @@ const criacad_user = await Users.create({
     mensagens: mensagens_c
 })
 .then(function(){
-        return [true,"cadastro feito com SUCESSO"]
+        let res = [true,"cadastro feito com SUCESSO"]
+        return res
     })
 .catch(err=>{ 
-        return [false,err]
+        let res = [false,err]
+        return res
     })
 
 }else{
-return ["null","Você ja esta cadastrado"]
+let res = ["null","Você ja esta cadastrado"]
+return res
 }
 
 

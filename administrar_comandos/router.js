@@ -1,10 +1,11 @@
-const { cadastro,  clear , antlink , boas_vindas , s , abraçar , matar , gay , gado , help , ban , adm_grupo , marcar_grupo } = require("../lib/routes/caminhos.js");
+const { perfil , cadastro,  clear , antlink , boas_vindas , s , abraçar , matar , gay , gado , help , ban , adm_grupo , marcar_grupo } = require("../lib/routes/caminhos.js");
 const fs = require('fs')
 const comandos = JSON.parse(fs.readFileSync('./db/comandos/comandos.json'))
 let array_comandos = [];
-
+const { updateMessage } = require("../db/query/alterar")
 /*-----------------------------------------------------------------------*/
 
+array_comandos.perfil = perfil;
 array_comandos.cadastro = cadastro;
 array_comandos.clear = clear;
 array_comandos.antlink = antlink;
@@ -25,6 +26,8 @@ array_comandos.adm_grupo = adm_grupo;
 /*-----------------------------------------------------------------------*/
 
   const gerencia = async (msg , id ,conn, message,numero_cll) => {
+    const tel = (message.participant).replace("@s.whatsapp.net","");
+    updateMessage(tel)
 
 const array_msg = msg.split(" ")
 

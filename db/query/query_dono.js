@@ -13,38 +13,30 @@ const insert_root = async (nome_c,tel_c,idade_c) => {
 
 
 
-    const verificacao1 = await busca_root()
-console.log("results:" + verificacao1.length)
+ 
 
-if(verificacao1.length<=0){
-const criacad_dono = await Donos.create({
-    nome: nome,
-    tel: tel,
-    idade: idade,
-})
-.then(function(){
-        tb("cadastro root feito com SUCESSO")
-    })
-.catch(err=>{ 
-        tb(err)
-    })
 
-}else{
-tb("Você ja esta cadastrado como dono")
-}
+
+    const criacad_dono = await Donos.create({
+        nome: nome,
+        tel: tel,
+        idade: idade,
+        })
+        .then(function(){
+            tb("cadastro feito com SUCESSO")
+        })
+        .catch(err=>{ 
+         tb(err)
+        })
+        
+        
+        
+
 
 
 /* ********************************************************************* */
 
 
-const verificacao =  await Users.findAll({
-    where: {
-      tel: tel,
-    }
-  });
-
-
-if(verificacao<=0){
 const criacad_user = await Users.create({
 nome: nome,
 tel: tel,
@@ -61,9 +53,6 @@ mensagens: mensagens
  tb(err)
 })
 
-}else{
-tb("Você ja esta cadastrado como usuario")
-}
 
 }
 

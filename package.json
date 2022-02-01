@@ -20,10 +20,10 @@
     "ffprobe-static": "^3.0.0",
     "fluent-ffmpeg": "^2.1.2",
     "inquirer": "^8.2.0",
+    "mysql2": "^2.3.3",
     "node-banner": "^1.4.0",
     "qrcode-terminal": "^0.12.0",
     "sequelize": "^6.15.0",
-    "sqlite3": "^5.0.2",
     "streamifier": "^0.1.1",
     "terminal-banner": "^1.1.0"
   }
