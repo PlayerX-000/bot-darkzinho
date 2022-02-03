@@ -1,10 +1,11 @@
-const { perfil , cadastro,  clear , antlink , boas_vindas , s , abraçar , matar , gay , gado , help , ban , adm_grupo , marcar_grupo } = require("../lib/routes/caminhos.js");
+const { caracoroa, perfil , cadastro,  clear , antlink , boas_vindas , s , abraçar , matar , gay , gado , help , ban , adm_grupo , marcar_grupo } = require("../lib/routes/caminhos.js");
 const fs = require('fs')
 const comandos = JSON.parse(fs.readFileSync('./db/comandos/comandos.json'))
 let array_comandos = [];
 const { updateMessage } = require("../db/comandos_db/alterar")
 /*-----------------------------------------------------------------------*/
 
+array_comandos.caracoroa = caracoroa;
 array_comandos.perfil = perfil;
 array_comandos.cadastro = cadastro;
 array_comandos.clear = clear;
