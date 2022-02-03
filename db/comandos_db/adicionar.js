@@ -11,7 +11,6 @@ const insert = async (nome_c,tel_c,idade_c,nivel_c,xp_c,comandos_c,mensagens_c) 
           tel: tel_c,
         }
       });
-console.log(verificacao)
 
 
 
@@ -25,14 +24,13 @@ const criacad_user = await Users.create({
     comandos: comandos_c,
     mensagens: mensagens_c
 })
-.then(function(){
-        let res = [true,"cadastro feito com SUCESSO"]
-        return res
-    })
-.catch(err=>{ 
-        let res = [false,err]
-        return res
-    })
+.catch(err=>{
+return[false,err]
+})
+        return [true,"cadastro feito com SUCESSO"]
+
+    
+
 
 }else{
 let res = ["null","Você ja esta cadastrado"]

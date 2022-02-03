@@ -2,7 +2,7 @@ const { perfil , cadastro,  clear , antlink , boas_vindas , s , abraçar , matar
 const fs = require('fs')
 const comandos = JSON.parse(fs.readFileSync('./db/comandos/comandos.json'))
 let array_comandos = [];
-const { updateMessage } = require("../db/query/alterar")
+const { updateMessage } = require("../db/comandos_db/alterar")
 /*-----------------------------------------------------------------------*/
 
 array_comandos.perfil = perfil;
@@ -27,17 +27,21 @@ array_comandos.adm_grupo = adm_grupo;
 
   const gerencia = async (msg , id ,conn, message,numero_cll) => {
     const tel = (message.participant).replace("@s.whatsapp.net","");
-    updateMessage(tel)
+  
+ await updateMessage(tel,1,0)
 
 const array_msg = msg.split(" ")
 
-  array_msg.forEach((palavras,ind) => {
+  array_msg.forEach(async(palavras,ind) => {
     if(palavras.substr(0, 1) == "!"){
 
 let comando = palavras.replace("!","")
-    if(comandos.includes(`${comando}`)===true){
-
+const isComando = comandos.includes(`${comando}`)
+    if(isComando){
+ 
  logs_caht_update(comando , id)
+
+ await updateMessage(tel,1,1)
  array_comandos[comando](id, conn, array_msg[ind+1], message,numero_cll);
 
 }

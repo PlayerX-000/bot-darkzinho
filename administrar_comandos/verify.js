@@ -3,7 +3,7 @@ const { MessageType } = require('@adiwajshing/baileys')
 const fs = require('fs')
 const comandos = JSON.parse(fs.readFileSync('./db/comandos/comandos.json'))
 const  antlink_v  = require("../lib/functions/IO_antlink")
-
+const { updateMessage } = require("../db/comandos_db/alterar")
 
 
 const very = async (msg , id ,conn, message,numero_cll) => {

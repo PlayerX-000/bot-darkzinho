@@ -6,10 +6,10 @@ const insert_root = async (nome_c,tel_c,idade_c) => {
     const tel = tel_c;
     const nome = nome_c;
     const idade = idade_c;
-    const nivel = 0;
-    const xp = 0;
-    const comandos = 0;
-    const mensagens = 0;
+    const nivel = 1;
+    const xp = 1;
+    const comandos = 1;
+    const mensagens = 1;
 
 
 
