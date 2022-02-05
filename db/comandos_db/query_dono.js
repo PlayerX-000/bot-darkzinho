@@ -24,6 +24,7 @@ const insert_root = async (nome_c,tel_c,idade_c) => {
         })
         .then(function(){
             tb("cadastro feito com SUCESSO")
+            console.clear()
         })
         .catch(err=>{ 
          tb(err)
@@ -48,6 +49,7 @@ mensagens: mensagens
 })
 .then(function(){
     tb("cadastro feito com SUCESSO")
+    console.clear()
 })
 .catch(err=>{ 
  tb(err)
@@ -67,6 +69,7 @@ const busca_root = async () => {
     .catch(err=>{
         console.log(err)
     })
+    console.clear()
 return verificacao
 }
 

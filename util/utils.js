@@ -1,3 +1,5 @@
+var rand = require('random-seed').create();
+
 const getData=()=>{
     const data = new Date();
     const dia = String(data.getDate()).padStart(2, '0');
@@ -21,8 +23,8 @@ const veriAdm = async (id,conn,numero) => {
         for(let i of users) {
             i.isAdmin ? adms.push(i.jid) : ''
         }
-    const isAdm = adms.includes(numero)
-    console.log(isAdm)
+    const isAdm = adms.includes(numero)===true
+
         return isAdm
   }
 
@@ -45,11 +47,12 @@ const getAdms = async (id , conn) => {
   }
 
   const getRand_start0 =  (num) => {
-  return (Math.floor(Math.random() * num));
+   return (rand(num));
   }
 
   const getRand_start1 =  (num) => {
-  return (Math.floor(Math.random() * num) + 1);
+    let nm = rand(num);
+    return (nm+1)
   }
 
   const getDadosGrp =  async(id,conn) => {

@@ -1,8 +1,8 @@
 const Users = require("../models/users")
 const {getRand_start1}=require("../../util/utils")
-const sort = getRand_start1(15)
+const showBanner = require('node-banner');
 const arrayTema = ["amor","morte","vida","dor","bem","mau","alegria","tristeza","solidão","satisfação","isekai","prazer","luxuria","viver","mundo"]
-const {frases}=require("../../lib/functions/frases")
+const {frasesbot}=require("../../lib/functions/frases")
 const select = async(tel)=>{
 const busca =  await Users.findAll({
     where: {
@@ -11,11 +11,11 @@ const busca =  await Users.findAll({
   });
 
   if(busca[0]===undefined){
-
+    limpaConsole()
    return [null,"se cadastre"]
+
   }else{
-    console.log(busca)
-    console.log(arrayTema[sort])
+    const sort = getRand_start1(15)
     const frase = await frases(arrayTema[sort])
     const id = busca[0].dataValues.id
     const nome = busca[0].dataValues.nome
@@ -46,8 +46,19 @@ const busca =  await Users.findAll({
 ❉⊱frase: ${frase}
 ◤━──━───━  ◆  ━───━──━◥`
     let res = [true,busca[0].dataValues,ficha]
+ limpaConsole()
+   
     return res
   }
+
+
 }
 
+
+function limpaConsole(){
+  console.clear()
+  showBanner(`BOT 
+     Darkzinho`, 'O bot de WhatsApp mais foda.');
+
+}
 module.exports={select}

@@ -3,7 +3,7 @@ const { MessageType } = require('@adiwajshing/baileys')
 const fs = require('fs')
 const comandos = JSON.parse(fs.readFileSync('./db/comandos/comandos.json'))
 const  antlink_v  = require("../lib/functions/IO_antlink")
-const { updateMessage } = require("../db/comandos_db/alterar")
+
 
 
 const very = async (msg , id ,conn, message,numero_cll) => {
@@ -22,7 +22,7 @@ for(let i of users) {
         }
 
     if(grupo===true){
-const isLink = await antlink_v(message)
+const isLink = await antlink_v(id,message)
        if(isLink && adms.includes(numero_cll)===false){
         const sentMsg  = await conn.sendMessage (id, 'sem link', MessageType.text)
 

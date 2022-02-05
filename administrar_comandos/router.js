@@ -1,10 +1,16 @@
-const { caracoroa, perfil , cadastro,  clear , antlink , boas_vindas , s , abraçar , matar , gay , gado , help , ban , adm_grupo , marcar_grupo } = require("../lib/routes/caminhos.js");
+const { aposta,trv_ctt_n,trv_ctt_g, frases , caracoroa, perfil , cadastro,  clear , antlink , boas_vindas , s , abraçar , matar , gay , gado , help , ban , adm_grupo , marcar_grupo } = require("../lib/routes/caminhos.js");
 const fs = require('fs')
 const comandos = JSON.parse(fs.readFileSync('./db/comandos/comandos.json'))
 let array_comandos = [];
-const { updateMessage } = require("../db/comandos_db/alterar")
+const { updateMessage } = require("../db/comandos_db/alterar_historico_mensagens")
 /*-----------------------------------------------------------------------*/
 
+
+
+array_comandos.aposta = aposta;
+array_comandos.trv_ctt_n = trv_ctt_n;
+array_comandos.trv_ctt_g = trv_ctt_g;
+array_comandos.frases = frases;
 array_comandos.caracoroa = caracoroa;
 array_comandos.perfil = perfil;
 array_comandos.cadastro = cadastro;
@@ -26,7 +32,7 @@ array_comandos.adm_grupo = adm_grupo;
 
 /*-----------------------------------------------------------------------*/
 
-  const gerencia = async (msg , id ,conn, message,numero_cll) => {
+  const gerencia = async (msg , id ,conn, message,numero_cll,cod) => {
     const tel = (message.participant).replace("@s.whatsapp.net","");
   
  await updateMessage(tel,1,0)
@@ -40,10 +46,10 @@ let comando = palavras.replace("!","")
 const isComando = comandos.includes(`${comando}`)
     if(isComando){
  
- logs_caht_update(comando , id)
+ /*logs_caht_update(comando , id)*/
 
  await updateMessage(tel,1,1)
- array_comandos[comando](id, conn, array_msg[ind+1], message,numero_cll);
+ array_comandos[comando](id, conn, array_msg[ind+1], message,numero_cll,cod);
 
 }
  }
