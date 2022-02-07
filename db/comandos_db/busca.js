@@ -3,10 +3,15 @@ const {getRand_start1}=require("../../util/utils")
 const showBanner = require('node-banner');
 const arrayTema = ["amor","morte","vida","dor","bem","mau","alegria","tristeza","solidão","satisfação","isekai","prazer","luxuria","viver","mundo"]
 const {frasesbot}=require("../../lib/functions/frases")
+
 const select = async(tel)=>{
+
+const sort = getRand_start1(15)
+ const frase = await frasesbot(arrayTema[sort])
+
 const busca =  await Users.findAll({
     where: {
-      tel: tel,
+      tel: tel
     }
   });
 
@@ -15,8 +20,7 @@ const busca =  await Users.findAll({
    return [null,"se cadastre"]
 
   }else{
-    const sort = getRand_start1(15)
-    const frase = await frases(arrayTema[sort])
+    
     const id = busca[0].dataValues.id
     const nome = busca[0].dataValues.nome
     const tel = busca[0].dataValues.tel

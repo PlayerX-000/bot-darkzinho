@@ -23,7 +23,7 @@ const veriAdm = async (id,conn,numero) => {
         for(let i of users) {
             i.isAdmin ? adms.push(i.jid) : ''
         }
-    const isAdm = adms.includes(numero+"@s.whatsapp.net")===true
+    const isAdm = adms.includes(numero)===true
 
         return isAdm
   }
