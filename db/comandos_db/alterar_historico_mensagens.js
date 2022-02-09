@@ -19,7 +19,7 @@ const idade = busca[0].dataValues.idade
 const comandos = busca[0].dataValues.comandos + com
 const mensagens = busca[0].dataValues.mensagens + msg
 let nivel = busca[0].dataValues.nivel
-let num = (mensagens+4)/busca[0].dataValues.nivel
+let num = ((mensagens/2)+10)/busca[0].dataValues.nivel
 let add = getRand_start1(num)
 const xp = busca[0].dataValues.xp + add
 
@@ -94,14 +94,15 @@ if(xp>=0 && xp<=100){
 
 }
 
-async function updates(numero,nome,idade,comandos,mensagens,xp,nivel,atk,def,vida,Users){
+async function updates(numero,nome,idade,comandos,mensagens,xp,nivel,atk,def,vida){
 const tel = numero;
         let up = await Users.update({
         nome , tel , idade , nivel , xp , comandos , mensagens , atk , def , vida
             },{
         where:{
           tel:numero
-}})}
+}}).catch(err=>{console.log(err)})
+}
 
 
 module.exports={updateMessage}

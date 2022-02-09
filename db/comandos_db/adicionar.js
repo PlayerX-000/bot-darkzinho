@@ -2,7 +2,7 @@ const Users = require("../models/users")
 
 
 
-const insert = async (nome_c,tel_c,idade_c,nivel_c,xp_c,comandos_c,mensagens_c) => {
+const insert = async (nome_c,tel_c,idade_c,nivel_c,xp_c,comandos_c,mensagens_c,atk_c,vida_c,def_c,vidaMax_c) => {
 
 
 
@@ -22,7 +22,11 @@ const criacad_user = await Users.create({
     nivel: nivel_c,
     xp: xp_c,
     comandos: comandos_c,
-    mensagens: mensagens_c
+    mensagens: mensagens_c,
+    atk: atk_c,
+    def: def_c,
+    vida: vida_c,
+    vidaMax: vidaMax_c
 })
 .catch(err=>{
 return[false,err]

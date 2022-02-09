@@ -15,7 +15,7 @@ const busca =  await Users.findAll({
     where: {
       tel: tel
     }
-  });
+  }).catch(err=>{console.log(err)})
 
   if(busca[0]===undefined){
     limpaConsole()
@@ -62,7 +62,7 @@ const busca =  await Users.findAll({
     let res = [true,busca[0].dataValues,ficha]
  limpaConsole()
    
-    return res
+    return await res
   }
 
 
