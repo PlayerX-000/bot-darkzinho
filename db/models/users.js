@@ -47,6 +47,26 @@ Users.init({
     allowNull: false
     },
 
+    atk: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+    },
+
+    def: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+    },
+
+    vida: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+    },
+
+    vidaMax: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+    },
+
     mensagens: {
     type: DataTypes.INTEGER,
     allowNull: false

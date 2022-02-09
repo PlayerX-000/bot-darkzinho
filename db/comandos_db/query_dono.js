@@ -10,7 +10,10 @@ const insert_root = async (nome_c,tel_c,idade_c) => {
     const xp = 1;
     const comandos = 1;
     const mensagens = 1;
-
+    const atk = 1;
+    const def = 1;
+    const vida = 10;
+    const vidaMax = 10;
 
 
  
@@ -45,7 +48,12 @@ idade: idade,
 nivel: nivel,
 xp: xp,
 comandos: comandos,
-mensagens: mensagens
+mensagens: mensagens,
+atk: atk,
+def: def,
+vida: vida,
+vidaMax: vidaMax
+
 })
 .then(function(){
     tb("cadastro feito com SUCESSO")

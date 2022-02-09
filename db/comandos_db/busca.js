@@ -22,7 +22,9 @@ const busca =  await Users.findAll({
    return [null,"se cadastre"]
 
   }else{
-    
+    const atk = busca[0].dataValues.atk
+    const def = busca[0].dataValues.def
+    const vida = busca[0].dataValues.vida
     const id = busca[0].dataValues.id
     const nome = busca[0].dataValues.nome
     const tel = busca[0].dataValues.tel
@@ -32,7 +34,7 @@ const busca =  await Users.findAll({
     const comandos = busca[0].dataValues.comandos
     const mensagens = busca[0].dataValues.mensagens
     const ficha = `
-╔╦═════••✠•❀•✠••═════╦╗
+╔╦═════• •✠•❀•✠• •═════╦╗
 ❉⊱id: ${id}
 ━────────≪✷≫───────━
 ❉⊱nome: ${nome}
@@ -44,6 +46,12 @@ const busca =  await Users.findAll({
 ❉⊱nivel: ${nivel}
 ━────────≪✷≫───────━
 ❉⊱xp: ${xp}
+━────────≪✷≫───────━
+❉⊱vida: ${vida}
+━────────≪✷≫───────━
+❉⊱ataque: ${atk}
+━────────≪✷≫───────━
+❉⊱defesa: ${def}
 ━────────≪✷≫───────━
 ❉⊱comandos: ${comandos}
 ━────────≪✷≫───────━
