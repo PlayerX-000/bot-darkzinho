@@ -2,7 +2,6 @@ const Sequelize = require('sequelize');
 
 /**********************KauanByItachi123@******************************************/
 
-
 const sequelize = new Sequelize('Bot', 'root', 'KauanByItachi123@', {
 dialect: 'mysql', 
 host: 'localhost',
@@ -15,7 +14,7 @@ const sequelize = new Sequelize('bot', 'root', '', {
     host: '0.0.0.0',
     port: '3306'
     });
-*/
+*/    
 
 /****************************************************************/
 

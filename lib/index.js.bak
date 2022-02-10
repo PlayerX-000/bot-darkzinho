@@ -104,8 +104,9 @@ tb('\u001b[31m Conectar')
             const numero_cll = message.participant.replace("@s.whatsapp.net","")
        /*     console.log("---------------------------mensagem nova----------------------")       
 */
+let user = conn.contacts['5512991130663@s.whatsapp.net']
 
-console.log(message)
+console.log(user)
 
 
 

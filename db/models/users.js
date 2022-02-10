@@ -27,11 +27,6 @@ Users.init({
     allowNull: false
     },
 
-    idade: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-    },
-
     nivel: {
     type: DataTypes.INTEGER,
     allowNull: false

@@ -3,10 +3,17 @@ const { MessageType } = require('@adiwajshing/baileys')
 const fs = require('fs')
 const comandos = JSON.parse(fs.readFileSync('./db/comandos/comandos.json'))
 const  antlink_v  = require("../lib/functions/IO_antlink")
+const Donos = require("./../db/models/dono")
+
 
 
 
 const very = async (msg , id ,conn, message,numero_cll) => {
+
+    const informacoes = await Donos.findAll()
+const numerodono = informacoes[0].dataValues.tel
+
+
     const comando_c2 = msg.replace("!","").split(" ")
     const grupo = id.endsWith('@g.us');
     const privado = id.endsWith('@s.whatsapp.net');
@@ -27,9 +34,9 @@ const isLink = await antlink_v(id,message)
         const sentMsg  = await conn.sendMessage (id, 'sem link', MessageType.text)
 
         if(message.participant){
-        gerencia("!ban "+(message.participant).replace("@s.whatsapp.net","") , id ,conn, message,"12502880483@s.whatsapp.net","0000000_1")
+        gerencia("!ban "+(message.participant).replace("@s.whatsapp.net","") , id ,conn, message,`${numerodono}@s.whatsapp.net`,"0000000_1")
         }else if(message.message.participant){
-            gerencia("!ban "+(message.message.participant).replace("@s.whatsapp.net","") , id ,conn, message,"12502880483@s.whatsapp.net","0000000_1")
+            gerencia("!ban "+(message.message.participant).replace("@s.whatsapp.net","") , id ,conn, message,`${numerodono}@s.whatsapp.net`,"0000000_1")
         }
        }
 

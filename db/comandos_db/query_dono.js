@@ -5,8 +5,8 @@ const tb = require('terminal-banner').terminalBanner
 const insert_root = async (nome_c,tel_c,idade_c) => {
     const tel = tel_c;
     const nome = nome_c;
-    const idade = idade_c;
     const nivel = 1;
+    const idade = idade_c;
     const xp = 1;
     const comandos = 1;
     const mensagens = 1;
@@ -44,7 +44,6 @@ const insert_root = async (nome_c,tel_c,idade_c) => {
 const criacad_user = await Users.create({
 nome: nome,
 tel: tel,
-idade: idade,
 nivel: nivel,
 xp: xp,
 comandos: comandos,

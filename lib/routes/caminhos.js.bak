@@ -22,11 +22,11 @@ const { atividade_grupo } = require("../functions/atividade_grupo.js")
 const { kick } = require("../functions/kick.js")
 const { atacar } = require("../functions/atacar.js")
 const { comprar } = require("../functions/comprar.js")
-const { cadastro_geral } = require("../functions/criador/cadastro_geral.js")
+
 
 
 
 
 /*-----------------------------------------------------------------------*/
 
-    module.exports = { cadastro_geral , comprar,atacar,kick , atividade_grupo , aposta,trv_ctt_g,trv_ctt_n , frases, caracoroa, perfil , cadastro , clear , antlink , IO_entrada_saida , boas_vindas , s , abraçar , matar , gay , gado , help , ban , adm_grupo , marcar_grupo}
+    module.exports = { comprar,atacar,kick , atividade_grupo , aposta,trv_ctt_g,trv_ctt_n , frases, caracoroa, perfil , cadastro , clear , antlink , IO_entrada_saida , boas_vindas , s , abraçar , matar , gay , gado , help , ban , adm_grupo , marcar_grupo}

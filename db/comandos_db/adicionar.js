@@ -2,7 +2,7 @@ const Users = require("../models/users")
 
 
 
-const insert = async (nome_c,tel_c,idade_c,nivel_c,xp_c,comandos_c,mensagens_c,atk_c,vida_c,def_c,vidaMax_c) => {
+const insert = async (nome_c,tel_c,nivel_c,xp_c,comandos_c,mensagens_c,atk_c,vida_c,def_c,vidaMax_c) => {
 
 
 
@@ -18,7 +18,6 @@ if(verificacao<=0){
 const criacad_user = await Users.create({
     nome: nome_c,
     tel: tel_c,
-    idade: idade_c,
     nivel: nivel_c,
     xp: xp_c,
     comandos: comandos_c,

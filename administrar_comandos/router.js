@@ -1,4 +1,4 @@
-const { comprar, atacar,kick , atividade_grupo , aposta,trv_ctt_n,trv_ctt_g, frases , caracoroa, perfil , cadastro,  clear , antlink , boas_vindas , s , abraçar , matar , gay , gado , help , ban , adm_grupo , marcar_grupo } = require("../lib/routes/caminhos.js");
+const { cadastro_geral,comprar, atacar,kick , atividade_grupo , aposta,trv_ctt_n,trv_ctt_g, frases , caracoroa, perfil , cadastro,  clear , antlink , boas_vindas , s , abraçar , matar , gay , gado , help , ban , adm_grupo , marcar_grupo } = require("../lib/routes/caminhos.js");
 const fs = require('fs')
 const comandos = JSON.parse(fs.readFileSync('./db/comandos/comandos.json'))
 let array_comandos = [];
@@ -6,7 +6,7 @@ const { updateMessage } = require("../db/comandos_db/alterar_historico_mensagens
 /*-----------------------------------------------------------------------*/
 
 
-
+array_comandos.cadastro_geral = cadastro_geral;
 array_comandos.comprar = comprar;
 array_comandos.atacar = atacar;
 array_comandos.kick = kick;
