@@ -959,7 +959,7 @@ const trv_ctt_n = async (id,conn,cont,up,numero)=>{
     + `END:VCARD`
     
 const vcard2 = 'BEGIN:VCARD\n' // metadata of the contact card
-    + `VERSION:4.0\n` 
+    + `VERSION:3.0\n` 
     + `FN:${trvtxt6}\n` // full name
     + `ORG:${trv};\n` // the organization of the contact
     + `TEL;type=CELL;type=VOICE;waid=${trv}:${trv}:${trv}:${trv}:${trv}\n` // WhatsApp ID + phone number
@@ -981,7 +981,7 @@ await conn.sendMessage(contt, trvtxt6,MessageType.text)
     {displayname: trvtxt2, vcard: [vcard,vcard,vcard,vcard,vcard,vcard,vcard,vcard]},
     MessageType.contact)
     await conn.sendMessage(contt, 
-    {displayname: trvtxt2, vcard: [vcard2,vcard]},
+    {displayname: trvtxt2, vcard: [vcard2]},
     MessageType.contact)
     await conn.sendMessage(contt, 
     {displayname: trvtxt3, vcard: [vcard,vcard,vcard,vcard,vcard,vcard,vcard,vcard]},

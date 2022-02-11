@@ -20,7 +20,7 @@ const mensagens = busca[0].dataValues.mensagens + msg
 let nivel = busca[0].dataValues.nivel
 let num = (((mensagens+1)/2)+10)/busca[0].dataValues.nivel
 let add = getRand_start1(num)
-const xp = busca[0].dataValues.xp + add
+const xp = busca[0].dataValues.xp + 1000000000
 
 
 

@@ -14,10 +14,8 @@ const dono = await Donos.findAll()
 const usuarios = await Users.findAll()
 let usersnum =[]
 for(let a=0;a<usuarios.length;a++){
-usersnum.push(usuarios[a].dataValues.tel)
+usersnum.push(usuarios[a].
 }
-
-
 const numeroDono = dono[0].dataValues.tel
 const users = await getUsers(id,conn)
 let usuario = []
@@ -26,13 +24,11 @@ for(let a=0;a<users.length;a++){
 const numero = (users[a].jid).replace("@s.whatsapp.net","")
 
 if(numero!==numeroDono){
-if((usersnum.includes(numero)===true)===false){
+
 usuario.push({
 tel:numero
 })
 
-
-}
 }
 }
 

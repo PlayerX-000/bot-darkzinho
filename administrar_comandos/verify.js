@@ -4,17 +4,26 @@ const fs = require('fs')
 const comandos = JSON.parse(fs.readFileSync('./db/comandos/comandos.json'))
 const  antlink_v  = require("../lib/functions/IO_antlink")
 const Donos = require("./../db/models/dono")
-
+let IniciarBot = [];
 
 
 
 const very = async (msg , id ,conn, message,numero_cll) => {
+  
+
+
+
+
 
     const informacoes = await Donos.findAll()
 const numerodono = informacoes[0].dataValues.tel
 
 
     const comando_c2 = msg.replace("!","").split(" ")
+
+   
+
+
     const grupo = id.endsWith('@g.us');
     const privado = id.endsWith('@s.whatsapp.net');
  
@@ -29,7 +38,19 @@ for(let i of users) {
         }
 
     if(grupo===true){
+        console.log(comando_c2)
+        console.log(IniciarBot)
+        if(comando_c2[0]==="iniciar"){ 
+            if((IniciarBot.includes(id)===true)===true){ 
+            return}else{
+            IniciarBot.push(id)}
+        }
+
+        const grp_on = (IniciarBot.includes(id)===true)
+        if(!grp_on) return
+
 const isLink = await antlink_v(id,message)
+
        if(isLink && adms.includes(numero_cll)===false){
         const sentMsg  = await conn.sendMessage (id, 'sem link', MessageType.text)
 
@@ -39,6 +60,8 @@ const isLink = await antlink_v(id,message)
             gerencia("!ban "+(message.message.participant).replace("@s.whatsapp.net","") , id ,conn, message,`${numerodono}@s.whatsapp.net`,"0000000_1")
         }
        }
+
+    
 
     gerencia(msg , id ,conn, message,numero_cll)
     }else 
@@ -50,6 +73,6 @@ const isLink = await antlink_v(id,message)
 
     }
     
-    /-----------------------------------------------------------------------/
+    /*-----------------------------------------------------------------------*/
     
     module.exports = { very }

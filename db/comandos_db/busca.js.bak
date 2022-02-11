@@ -13,6 +13,7 @@ const select = async(id,conn,tel)=>{
 const numerodonobot = numdonobd[0].dataValues.tel
 const nome_esc = []
 let referencia = []
+console.log(tel)
 
   referencia.nome =  conn.contacts[tel+"@s.whatsapp.net"]
  nome_esc.nome =  referencia.nome.name
