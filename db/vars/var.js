@@ -1,79 +1,235 @@
 const { MessageType } = require('@adiwajshing/baileys')
-const tb = require('terminal-banner').terminalBanner
+const tb = require('terminal-banner').terminalBanner;
+const fs = require("fs")
 
 
 
 
+var objinf = []
+var objativos = []
+
+const updatelocal = async() =>{
+  fs.readFile('./db/vars/grpsInf.json', 'utf-8', function (err, data1) {
+    if(err) throw err;
+    let res = JSON.parse(data1)
+  if(res[0]===undefined) return
+  for(let a=0;a<res.length;a++){
+  objinf.push(res[a])
+  }
+});
 
 
+fs.readFile('./db/vars/grpsativo.json', 'utf-8', function (err, data2) {
+  if(err) throw err;
+  let res = JSON.parse(data2)
+if(res[0]===undefined) return
+for(let a=0;a<res.length;a++){
+objativos.push(res[a])
+}
+});
 
 
-let entrada_saida = []
-let Antlink = []
-let grp_bv = []
-let grp_lk = []
+}
+const savelocalativo = async(id) =>{
+  console.log("entrou")
+  for(let a=0;a<objativos.length;a++){
+    if(objativos[a]===id){
+      objativos.splice(a, 1); 
+    }
+  }
+
+  objativos.push(id)
+
+  fs.unlink('./db/vars/grpsativo.json', function(err) {
+    if(err) throw err
+  console.log("removido")
+  })
+  
+  let newjson = JSON.stringify(objativos)
+  console.log(newjson)
+  fs.writeFile('./db/vars/grpsativo.json', newjson,{enconding:'utf-8',flag: 'w+'}, function (err) {
+    if (err) throw err;
+    console.log('criado');
+  });
 
 
+}
+const savelocalinf = async(id,newobj) =>{
+for(let a=0;a<objinf.length;a++){
+  if(objinf[a].id===id){
+    objinf.splice(a, 1); 
+  }
+}
+objinf.push(newobj)
 
+fs.unlink('./db/vars/grpsInf.json', function(err) {
+  if(err) throw err
+console.log("removido")
+})
+
+let newjson = JSON.stringify(obj)
+
+fs.writeFile('./db/vars/grpsInf.json', newjson,{enconding:'utf-8',flag: 'w+'}, function (err) {
+  if (err) throw err;
+  console.log('criado');
+});
+}
 
 
 
 
 const on_off_bemvindo = async(id,conn,state) =>{
+ 
+
+
+
 if(state=="off"){
-    entrada_saida.stats = false
-    for( var i = 0; i < grp_bv.length; i++){ 
-      if ( grp_bv[i] === id) { 
-        grp_bv.splice(i, 1); 
-      }
-  }
-      const sentMsg  = await conn.sendMessage (id, 'Boas Vindas: OFF', MessageType.text)
-    }else if(state=="on"){
-        entrada_saida.stats = true    
-          if ((grp_bv.includes(`${id}`)===true)===false) { 
-grp_bv.push(id)
-          }
-          const sentMsg  = await conn.sendMessage (id, 'Boas Vindas: ON', MessageType.text)
-    }else{
-    entrada_saida.stats = false
-  tb('\u001b[34m Boas vindas: OFF')
-  console.clear()
+
+if(objinf[0]===undefined){
+  savelocalinf(id,{
+    id:id,
+    vars:{
+      antlink:false,
+      boasvindas:false
     }
+  })
 }
+  for(let a=0;a<objinf.length;a++){
+    if(objinf[a].id===id){
+let antlink = objinf[a].vars.antlink
+let newobj = {
+  id: id,
+  vars:{
+    antlink: antlink,
+    boasvindas: false
+  }
+}
+
+savelocalinf(id,newobj)
+await conn.sendMessage (id, 'Boas Vindas: OFF', MessageType.text)
+    }
+  }
+  
+   
+
+    
+
+
+    }else if(state=="on"){
+
+
+      if(objinf[0]===undefined){
+        savelocalinf(id,{
+          id:id,
+          vars:{
+            antlink:false,
+            boasvindas:true
+          }
+        })
+      }
+
+
+      for(let a=0;a<objinf.length;a++){
+        if(objinf[a].id===id){
+    let antlink = objinf[a].vars.antlink
+    let newobj = {
+      id: id,
+      vars:{
+        antlink: antlink,
+        boasvindas: true
+      }
+    }
+    
+    savelocalinf(id,newobj)
+    await conn.sendMessage (id, 'Boas Vindas: ON', MessageType.text)
+        }
+      }
+  
+    }
+  }
 
 
 const on_off_antlink = async(id,conn,state) =>{
   if(state=="off"){
-    Antlink.stats = false
-    for( var i = 0; i < grp_lk.length; i++){ 
-      if ( grp_lk[i] === id) { 
-        grp_lk.splice(i, 1); 
-      }
+
+if(objinf[0]===undefined){
+  savelocalinf(id,{
+    id:id,
+    vars:{
+      antlink:false,
+      boasvindas:false
+    }
+  })
+}
+  for(let a=0;a<objinf.length;a++){
+    if(objinf[a].id===id){
+      let boasvindas = objinf[a].vars.boasvindas
+let newobj = {
+  id: id,
+  vars:{
+    antlink: false,
+    boasvindas: boasvindas
   }
-        const sentMsg  = await conn.sendMessage (id, 'Ant Link: OFF', MessageType.text)
-      }else if(state=="on"){
-        Antlink.stats = true
-        const veryexist = grp_lk.includes(`${id}`)===true
-        
-        if(veryexist===false){ 
-          grp_lk.push(id)
-                    }
-                
-            const sentMsg  = await conn.sendMessage (id, 'Ant Link: ON', MessageType.text)
-      }else{
-        Antlink.stats = false
-      tb('\u001b[34m Anti link: OFF')
-      console.clear()
+}
+
+savelocalinf(id,newobj)
+await conn.sendMessage (id, 'Anti Link: OFF', MessageType.text)
+    }
+  }
+  
+   
+
+    
+
+
+    }else if(state=="on"){
+
+
+      if(objinf[0]===undefined){
+        savelocalinf(id,{
+          id:id,
+          vars:{
+            antlink:true,
+            boasvindas:false
+          }
+        })
       }
+
+      
+      for(let a=0;a<objinf.length;a++){
+        if(objinf[a].id===id){
+    let boasvindas = objinf[a].vars.boasvindas
+    let newobj = {
+      id: id,
+      vars:{
+        antlink: true,
+        boasvindas: boasvindas
+      }
+    }
+    
+    savelocalinf(id,newobj)
+    await conn.sendMessage (id, 'Anti Link: ON', MessageType.text)
+        }
+      }
+  
+    }
+  }
+
+
+  const grpusandobot = async(id,conn) =>{
+    if(objativos[0]===undefined){
+      savelocalativo(id)
+    }
+
+    await conn.sendMessage (id, 'Grupo Registrado No Banco de Dados do Bot', MessageType.text)
+    console.log(objativos)
+
+
   }
 
 
 
+  updatelocal()
+console.log(objinf)
 
-
-
-
-
-on_off_antlink()
-on_off_bemvindo()
-module.exports = { entrada_saida , on_off_bemvindo , Antlink , on_off_antlink , grp_bv , grp_lk }
+module.exports = { grpusandobot , objinf , objativos , on_off_bemvindo , on_off_antlink }

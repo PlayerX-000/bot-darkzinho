@@ -3,6 +3,7 @@ const { MessageType } = require('@adiwajshing/baileys')
 const fs = require('fs')
 const comandos = JSON.parse(fs.readFileSync('./db/comandos/comandos.json'))
 const  antlink_v  = require("../lib/functions/IO_antlink")
+const { grpusandobot ,objativos } = require("../db/vars/var")
 const Donos = require("./../db/models/dono")
 let IniciarBot = [];
 
@@ -40,13 +41,13 @@ for(let i of users) {
     if(grupo===true){
         console.log(comando_c2)
         console.log(IniciarBot)
+
+
         if(comando_c2[0]==="iniciar"){ 
-            if((IniciarBot.includes(id)===true)===true){ 
-            return}else{
-            IniciarBot.push(id)}
+         grpusandobot(id,conn)
         }
 
-        const grp_on = (IniciarBot.includes(id)===true)
+        const grp_on = (objativos.includes(id)===true)
         if(!grp_on) return
 
 const isLink = await antlink_v(id,message)
