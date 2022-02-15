@@ -6,7 +6,7 @@ const  antlink_v  = require("../lib/functions/IO_antlink")
 const { grpusandobot ,objativos } = require("../db/vars/var")
 const Donos = require("./../db/models/dono")
 let IniciarBot = [];
-
+const {veriAdm} = require("../util/utils")
 
 
 const very = async (msg , id ,conn, message,numero_cll) => {
@@ -42,9 +42,11 @@ for(let i of users) {
         console.log(comando_c2)
         console.log(IniciarBot)
 
-
-        if(comando_c2[0]==="iniciar"){ 
+const isAdm = await veriAdm(id,conn,numero_cll)
+        if(comando_c2[0]==="iniciar" && isAdm===false){ 
          grpusandobot(id,conn)
+        }else if(comando_c2[0]==="iniciar" && isAdm===false){
+          await conn.sendMessage (id,"Você não tem permissão para usar esse comando", MessageType.text)
         }
 
         const grp_on = (objativos.includes(id)===true)
@@ -52,8 +54,8 @@ for(let i of users) {
 
 const isLink = await antlink_v(id,message)
 
-       if(isLink && adms.includes(numero_cll)===false){
-        const sentMsg  = await conn.sendMessage (id, 'sem link', MessageType.text)
+       if(isLink && isAdm===false){
+        await conn.sendMessage (id, 'sem link', MessageType.text)
 
         if(message.participant){
         gerencia("!ban "+(message.participant).replace("@s.whatsapp.net","") , id ,conn, message,`${numerodono}@s.whatsapp.net`,"0000000_1")

@@ -54,7 +54,7 @@ const savelocalativo = async(id) =>{
 
 
 }
-const savelocalinf = async(id,newobj) =>{
+const savelocalinf = async(id,newobj,cod) =>{
 for(let a=0;a<objinf.length;a++){
   if(objinf[a].id===id){
     objinf.splice(a, 1); 
@@ -67,11 +67,10 @@ fs.unlink('./db/vars/grpsInf.json', function(err) {
 console.log("removido")
 })
 
-let newjson = JSON.stringify(obj)
+let newjson = JSON.stringify(objinf)
 
-fs.writeFile('./db/vars/grpsInf.json', newjson,{enconding:'utf-8',flag: 'w+'}, function (err) {
+fs.writeFile('./db/vars/grpsInf.json', newjson,{enconding:'utf-8',flag: 'w+'},  function (err) {
   if (err) throw err;
-  console.log('criado');
 });
 }
 
@@ -85,6 +84,8 @@ const on_off_bemvindo = async(id,conn,state) =>{
 
 if(state=="off"){
 
+
+
 if(objinf[0]===undefined){
   savelocalinf(id,{
     id:id,
@@ -94,25 +95,48 @@ if(objinf[0]===undefined){
     }
   })
 }
+
+let idGroup = []
+
+  for(let a=0;a<objinf.length;a++){
+    idGroup.push(objinf[a].id)
+  }
+
+let dadosGrpExist = idGroup.includes(id)
+
+if(dadosGrpExist){
   for(let a=0;a<objinf.length;a++){
     if(objinf[a].id===id){
-let antlink = objinf[a].vars.antlink
-let newobj = {
-  id: id,
-  vars:{
-    antlink: antlink,
-    boasvindas: false
-  }
-}
+      let antlink = objinf[a].vars.antlink
+      let boasvindas = objinf[a].vars.boasvindas
 
-savelocalinf(id,newobj)
-await conn.sendMessage (id, 'Boas Vindas: OFF', MessageType.text)
+      let newobj = {
+        id: id,
+        vars:{
+          antlink: antlink,
+          boasvindas: !boasvindas
+        }
+      }
+      console.log(newobj)
+      savelocalinf(id,newobj)      
+
     }
   }
-  
-   
+}else{
 
-    
+  let newobj = {
+    id: id,
+    vars:{
+      antlink: false,
+      boasvindas: false
+    }
+  }
+  console.log(newobj)
+  savelocalinf(id,newobj)    
+
+}
+  
+  await conn.sendMessage (id, 'Boas Vindas: OFF', MessageType.text)
 
 
     }else if(state=="on"){
@@ -127,59 +151,110 @@ await conn.sendMessage (id, 'Boas Vindas: OFF', MessageType.text)
           }
         })
       }
+    
+let idGroup = []
 
+for(let a=0;a<objinf.length;a++){
+  idGroup.push(objinf[a].id)
+}
 
-      for(let a=0;a<objinf.length;a++){
-        if(objinf[a].id===id){
+let dadosGrpExist = idGroup.includes(id)
+
+if(dadosGrpExist){
+for(let a=0;a<objinf.length;a++){
+  if(objinf[a].id===id){
     let antlink = objinf[a].vars.antlink
+    let boasvindas = objinf[a].vars.boasvindas
+
     let newobj = {
       id: id,
       vars:{
         antlink: antlink,
-        boasvindas: true
+        boasvindas: !boasvindas
       }
     }
-    
-    savelocalinf(id,newobj)
-    await conn.sendMessage (id, 'Boas Vindas: ON', MessageType.text)
-        }
-      }
-  
+    console.log(newobj)
+    savelocalinf(id,newobj)      
+
+  }
+}
+}else{
+
+let newobj = {
+  id: id,
+  vars:{
+    antlink: false,
+    boasvindas: true
+  }
+}
+console.log(newobj)
+savelocalinf(id,newobj)    
+
+}
+
+      await conn.sendMessage (id, 'Boas Vindas: ON', MessageType.text)
     }
   }
 
 
 const on_off_antlink = async(id,conn,state) =>{
+  console.log(objinf)
   if(state=="off"){
 
-if(objinf[0]===undefined){
-  savelocalinf(id,{
-    id:id,
-    vars:{
-      antlink:false,
-      boasvindas:false
+    if(objinf[0]===undefined){
+      savelocalinf(id,{
+        id:id,
+        vars:{
+          antlink:false,
+          boasvindas:false
+        }
+      })
     }
-  })
-}
-  for(let a=0;a<objinf.length;a++){
-    if(objinf[a].id===id){
-      let boasvindas = objinf[a].vars.boasvindas
-let newobj = {
-  id: id,
-  vars:{
-    antlink: false,
-    boasvindas: boasvindas
-  }
-}
 
-savelocalinf(id,newobj)
-await conn.sendMessage (id, 'Anti Link: OFF', MessageType.text)
+
+    let idGroup = []
+
+    for(let a=0;a<objinf.length;a++){
+      idGroup.push(objinf[a].id)
     }
-  }
+    
+    let dadosGrpExist = idGroup.includes(id)
+    
+    if(dadosGrpExist){
+    for(let a=0;a<objinf.length;a++){
+      if(objinf[a].id===id){
+        let antlink = objinf[a].vars.antlink
+        let boasvindas = objinf[a].vars.boasvindas
+    
+        let newobj = {
+          id: id,
+          vars:{
+            antlink: !antlink,
+            boasvindas: boasvindas
+          }
+        }
+        console.log(newobj)
+        savelocalinf(id,newobj)      
+    
+      }
+    }
+    }else{
+    
+    let newobj = {
+      id: id,
+      vars:{
+        antlink: false,
+        boasvindas: false
+      }
+    }
+    console.log(newobj)
+    savelocalinf(id,newobj)    
+    
+    }
   
    
+  await conn.sendMessage (id, 'Anti Link: OFF', MessageType.text)
 
-    
 
 
     }else if(state=="on"){
@@ -195,33 +270,57 @@ await conn.sendMessage (id, 'Anti Link: OFF', MessageType.text)
         })
       }
 
+      let idGroup = []
+
+      for(let a=0;a<objinf.length;a++){
+        idGroup.push(objinf[a].id)
+      }
       
+      let dadosGrpExist = idGroup.includes(id)
+      
+      if(dadosGrpExist){
       for(let a=0;a<objinf.length;a++){
         if(objinf[a].id===id){
-    let boasvindas = objinf[a].vars.boasvindas
-    let newobj = {
-      id: id,
-      vars:{
-        antlink: true,
-        boasvindas: boasvindas
-      }
-    }
-    
-    savelocalinf(id,newobj)
-    await conn.sendMessage (id, 'Anti Link: ON', MessageType.text)
+          let antlink = objinf[a].vars.antlink
+          let boasvindas = objinf[a].vars.boasvindas
+      
+          let newobj = {
+            id: id,
+            vars:{
+              antlink: !antlink,
+              boasvindas: boasvindas
+            }
+          }
+          console.log(newobj)
+          savelocalinf(id,newobj)      
+      
         }
       }
-  
+      }else{
+      
+      let newobj = {
+        id: id,
+        vars:{
+          antlink: true,
+          boasvindas: false
+        }
+      }
+      console.log(newobj)
+      savelocalinf(id,newobj)    
+      
+      }
+      await conn.sendMessage (id, 'Anti Link: ON', MessageType.text)
+
     }
   }
 
 
   const grpusandobot = async(id,conn) =>{
-    if(objativos[0]===undefined){
+ 
       savelocalativo(id)
-    }
+    
 
-    await conn.sendMessage (id, 'Grupo Registrado No Banco de Dados do Bot', MessageType.text)
+   
     console.log(objativos)
 
 
