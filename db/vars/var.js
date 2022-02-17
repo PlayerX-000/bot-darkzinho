@@ -76,6 +76,143 @@ fs.writeFile('./db/vars/grpsInf.json', newjson,{enconding:'utf-8',flag: 'w+'},  
 
 
 
+const on_off_antfake = async(id,conn,state) =>{
+ 
+
+
+
+  if(state=="off"){
+  
+  
+  
+  
+  let idGroup = []
+  
+    for(let a=0;a<objinf.length;a++){
+      idGroup.push(objinf[a].id)
+    }
+  
+  let dadosGrpExist = idGroup.includes(id)
+  
+  if(dadosGrpExist){
+    for(let a=0;a<objinf.length;a++){
+      if(objinf[a].id===id && objinf[a].vars.antfake===true){
+        let antlink = objinf[a].vars.antlink
+        let boasvindas = objinf[a].vars.boasvindas
+        let antfake = objinf[a].vars.antfake
+  
+        let newobj = {
+          id: id,
+          vars:{
+            antlink: antlink,
+            boasvindas: boasvindas,
+            antfake: !antfake
+          }
+        }
+        console.log(newobj)
+        savelocalinf(id,newobj)      
+  
+      }else  if(objinf[a].id===id && objinf[a].vars.antfake===false){
+        return await conn.sendMessage (id, 'Anti Fake Ja Esta Desligado', MessageType.text)
+      }
+    }
+  }else{
+  
+    let newobj = {
+      id: id,
+      vars:{
+        antlink: false,
+        boasvindas: false,
+        antfake: false
+      }
+    }
+    console.log(newobj)
+    savelocalinf(id,newobj)    
+  
+  }
+  
+  
+  if(objinf[0]===undefined){
+    savelocalinf(id,{
+      id:id,
+      vars:{
+        antlink:false,
+        boasvindas:false,
+        antfake: false
+      }
+    })
+  }
+    
+    await conn.sendMessage (id, 'Anti Fake: OFF', MessageType.text)
+  
+  
+      }else if(state=="on"){
+  
+  
+      
+  let idGroup = []
+  
+  for(let a=0;a<objinf.length;a++){
+    idGroup.push(objinf[a].id)
+  }
+  
+  let dadosGrpExist = idGroup.includes(id)
+  
+  if(dadosGrpExist){
+  for(let a=0;a<objinf.length;a++){
+    if(objinf[a].id===id && objinf[a].vars.antfake===false){
+      let antlink = objinf[a].vars.antlink
+      let boasvindas = objinf[a].vars.boasvindas
+      let antfake = objinf[a].vars.antfake
+  
+      let newobj = {
+        id: id,
+        vars:{
+          antlink: antlink,
+          boasvindas: boasvindas,
+          antfake: !antfake
+        }
+      }
+      console.log(newobj)
+      savelocalinf(id,newobj)      
+  
+    }else if(objinf[a].id===id && objinf[a].vars.antfake===true){
+      return await conn.sendMessage (id, 'Anti Fake Ja Esta Ligado', MessageType.text)
+    }
+  }
+  }else{
+  
+  let newobj = {
+    id: id,
+    vars:{
+      antlink: false,
+      boasvindas: false,
+      antfake: true
+    }
+  }
+  console.log(newobj)
+  savelocalinf(id,newobj)    
+  
+  }
+  
+  
+  if(objinf[0]===undefined){
+    savelocalinf(id,{
+      id:id,
+      vars:{
+        antlink:false,
+        boasvindas:false,
+        antfake: true
+      }
+    })
+  }
+  
+        await conn.sendMessage (id, 'Anti Link: ON', MessageType.text)
+      }
+    }
+
+    
+
 
 const on_off_bemvindo = async(id,conn,state) =>{
  
@@ -86,15 +223,6 @@ if(state=="off"){
 
 
 
-if(objinf[0]===undefined){
-  savelocalinf(id,{
-    id:id,
-    vars:{
-      antlink:false,
-      boasvindas:false
-    }
-  })
-}
 
 let idGroup = []
 
@@ -106,20 +234,24 @@ let dadosGrpExist = idGroup.includes(id)
 
 if(dadosGrpExist){
   for(let a=0;a<objinf.length;a++){
-    if(objinf[a].id===id){
+    if(objinf[a].id===id && objinf[a].vars.boasvindas===true){
       let antlink = objinf[a].vars.antlink
       let boasvindas = objinf[a].vars.boasvindas
+      let antfake = objinf[a].vars.antfake
 
       let newobj = {
         id: id,
         vars:{
           antlink: antlink,
-          boasvindas: !boasvindas
+          boasvindas: !boasvindas,
+          antfake: antfake
         }
       }
       console.log(newobj)
       savelocalinf(id,newobj)      
 
+    }else  if(objinf[a].id===id && objinf[a].vars.boasvindas===false){
+      return await conn.sendMessage (id, 'Boas Vindas Ja Esta Desligado', MessageType.text)
     }
   }
 }else{
@@ -128,12 +260,25 @@ if(dadosGrpExist){
     id: id,
     vars:{
       antlink: false,
-      boasvindas: false
+      boasvindas: false,
+      antfake: false
     }
   }
   console.log(newobj)
   savelocalinf(id,newobj)    
 
+}
+
+
+if(objinf[0]===undefined){
+  savelocalinf(id,{
+    id:id,
+    vars:{
+      antlink:false,
+      boasvindas:false,
+      antfake: false
+    }
+  })
 }
   
   await conn.sendMessage (id, 'Boas Vindas: OFF', MessageType.text)
@@ -142,15 +287,6 @@ if(dadosGrpExist){
     }else if(state=="on"){
 
 
-      if(objinf[0]===undefined){
-        savelocalinf(id,{
-          id:id,
-          vars:{
-            antlink:false,
-            boasvindas:true
-          }
-        })
-      }
     
 let idGroup = []
 
@@ -162,20 +298,24 @@ let dadosGrpExist = idGroup.includes(id)
 
 if(dadosGrpExist){
 for(let a=0;a<objinf.length;a++){
-  if(objinf[a].id===id){
+  if(objinf[a].id===id && objinf[a].vars.boasvindas===false){
     let antlink = objinf[a].vars.antlink
     let boasvindas = objinf[a].vars.boasvindas
+    let antfake = objinf[a].vars.antfake
 
     let newobj = {
       id: id,
       vars:{
         antlink: antlink,
-        boasvindas: !boasvindas
+        boasvindas: !boasvindas,
+        antfake: antfake
       }
     }
     console.log(newobj)
     savelocalinf(id,newobj)      
 
+  }else if(objinf[a].id===id && objinf[a].vars.boasvindas===true){
+    return await conn.sendMessage (id, 'Boas Vindas Ja Esta Ligado', MessageType.text)
   }
 }
 }else{
@@ -184,12 +324,25 @@ let newobj = {
   id: id,
   vars:{
     antlink: false,
-    boasvindas: true
+    boasvindas: true,
+    antfake: false
   }
 }
 console.log(newobj)
 savelocalinf(id,newobj)    
 
+}
+
+
+if(objinf[0]===undefined){
+  savelocalinf(id,{
+    id:id,
+    vars:{
+      antlink:false,
+      boasvindas:true,
+      antfake: false
+    }
+  })
 }
 
       await conn.sendMessage (id, 'Boas Vindas: ON', MessageType.text)
@@ -201,15 +354,6 @@ const on_off_antlink = async(id,conn,state) =>{
   console.log(objinf)
   if(state=="off"){
 
-    if(objinf[0]===undefined){
-      savelocalinf(id,{
-        id:id,
-        vars:{
-          antlink:false,
-          boasvindas:false
-        }
-      })
-    }
 
 
     let idGroup = []
@@ -222,20 +366,24 @@ const on_off_antlink = async(id,conn,state) =>{
     
     if(dadosGrpExist){
     for(let a=0;a<objinf.length;a++){
-      if(objinf[a].id===id){
+      if(objinf[a].id===id && objinf[a].vars.antlink===true){
         let antlink = objinf[a].vars.antlink
         let boasvindas = objinf[a].vars.boasvindas
+        let antfake = objinf[a].vars.antfake
     
         let newobj = {
           id: id,
           vars:{
             antlink: !antlink,
-            boasvindas: boasvindas
+            boasvindas: boasvindas,
+            antfake: antfake
           }
         }
         console.log(newobj)
         savelocalinf(id,newobj)      
     
+      }else if(objinf[a].id===id && objinf[a].vars.antlink===false){
+        return  await conn.sendMessage (id, 'Anti link Ja esta Desativado', MessageType.text)
       }
     }
     }else{
@@ -244,7 +392,8 @@ const on_off_antlink = async(id,conn,state) =>{
       id: id,
       vars:{
         antlink: false,
-        boasvindas: false
+        boasvindas: false,
+        antfake: false
       }
     }
     console.log(newobj)
@@ -252,7 +401,18 @@ const on_off_antlink = async(id,conn,state) =>{
     
     }
   
-   
+    if(objinf[0]===undefined){
+      savelocalinf(id,{
+        id:id,
+        vars:{
+          antlink:false,
+          boasvindas:false,
+          antfake: false
+        }
+      })
+    }
+
+
   await conn.sendMessage (id, 'Anti Link: OFF', MessageType.text)
 
 
@@ -260,15 +420,7 @@ const on_off_antlink = async(id,conn,state) =>{
     }else if(state=="on"){
 
 
-      if(objinf[0]===undefined){
-        savelocalinf(id,{
-          id:id,
-          vars:{
-            antlink:true,
-            boasvindas:false
-          }
-        })
-      }
+
 
       let idGroup = []
 
@@ -277,23 +429,34 @@ const on_off_antlink = async(id,conn,state) =>{
       }
       
       let dadosGrpExist = idGroup.includes(id)
-      
+      console.log("grp exst?: "+dadosGrpExist)
+
+
       if(dadosGrpExist){
       for(let a=0;a<objinf.length;a++){
-        if(objinf[a].id===id){
+        console.log("antlink aki: "+objinf[a].vars.antlink)
+        console.log("id: "+a)
+           console.log("tamanho: "+objinf.length)
+        if(objinf[a].id===id && objinf[a].vars.antlink===false){
           let antlink = objinf[a].vars.antlink
           let boasvindas = objinf[a].vars.boasvindas
+          let antfake = objinf[a].vars.antfake
       
           let newobj = {
             id: id,
             vars:{
               antlink: !antlink,
-              boasvindas: boasvindas
+              boasvindas: boasvindas,
+              antfake: antfake
             }
           }
           console.log(newobj)
+          console.log("antro no on")
           savelocalinf(id,newobj)      
       
+        }else if(objinf[a].id===id && objinf[a].vars.antlink===true){
+         return await conn.sendMessage (id, 'Anti link Ja Esta Ligado', MessageType.text)
+
         }
       }
       }else{
@@ -302,14 +465,29 @@ const on_off_antlink = async(id,conn,state) =>{
         id: id,
         vars:{
           antlink: true,
-          boasvindas: false
+          boasvindas: false,
+          antfake: false
         }
       }
       console.log(newobj)
       savelocalinf(id,newobj)    
       
       }
+
+
+      if(objinf[0]===undefined){
+        savelocalinf(id,{
+          id:id,
+          vars:{
+            antlink:true,
+            boasvindas:false,
+            antfake: false
+          }
+        })
+      }
+
       await conn.sendMessage (id, 'Anti Link: ON', MessageType.text)
+
 
     }
   }
@@ -331,4 +509,4 @@ const on_off_antlink = async(id,conn,state) =>{
   updatelocal()
 console.log(objinf)
 
-module.exports = { grpusandobot , objinf , objativos , on_off_bemvindo , on_off_antlink }
+module.exports = { grpusandobot , objinf , objativos , on_off_bemvindo , on_off_antlink , on_off_antfake }
