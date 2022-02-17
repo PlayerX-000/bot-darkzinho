@@ -9,6 +9,26 @@ const Donos = require("./../db/models/dono")
 let IniciarBot = [];
 const {veriAdm} = require("../util/utils")
 
+const very2 = async (msg , id ,conn, message,numero_cll) => {
+
+    const informacoes = await Donos.findAll()
+    const numerodono = informacoes[0].dataValues.tel
+    console.log("numero dono: "+numerodono)
+    const isAdm = await veriAdm(id,conn,numero_cll)
+    const num = numero_cll.replace("@s.whatsapp.net","")
+    const isEstrangero = await antfake_v(id,num)
+    const grupo = id.endsWith('@g.us');
+
+    if(grupo===true && isEstrangero===true && isAdm===false){
+    
+     
+        await conn.sendMessage (id, 'VAZA GRINGO', MessageType.text)
+        gerencia("!ban @"+num , id ,conn, message,numerodono,"0000000_1")
+        return false
+       
+    }
+}
+
 
 const very = async (msg , id ,conn, message,numero_cll) => {
   
@@ -17,8 +37,7 @@ const very = async (msg , id ,conn, message,numero_cll) => {
 
 
 
-    const informacoes = await Donos.findAll()
-const numerodono = informacoes[0].dataValues.tel
+
 
 
     const comando_c2 = msg.replace("!","").split(" ")
@@ -29,15 +48,13 @@ const numerodono = informacoes[0].dataValues.tel
     const grupo = id.endsWith('@g.us');
     const privado = id.endsWith('@s.whatsapp.net');
  
- let adms = []
+ 
  
 const isGroup = id.endsWith('@g.us');
         const groupMetadata = isGroup ? await conn.groupMetadata(id) : ''
         const users = isGroup ? groupMetadata.participants : ''
 
-for(let i of users) {
-            i.isAdmin ? adms.push(i.jid) : ''
-        }
+
 
     if(grupo===true){
 
@@ -53,7 +70,7 @@ const isAdm = await veriAdm(id,conn,numero_cll)
         if(!grp_on) return
 
 const isLink = await antlink_v(id,message)
-const isEstrangero = await antfake_v(id,message)
+
 
 
        if(isLink && isAdm===false){
@@ -69,16 +86,7 @@ const isEstrangero = await antfake_v(id,message)
     
 
 
-       if(isEstrangero && isAdm===false){
-        await conn.sendMessage (id, 'VAZA GRINGO', MessageType.text)
-
-        if(message.participant){
-        gerencia("!ban "+(message.participant).replace("@s.whatsapp.net","") , id ,conn, message,`${numerodono}@s.whatsapp.net`,"0000000_1")
-        }else if(message.message.participant){
-            gerencia("!ban "+(message.message.participant).replace("@s.whatsapp.net","") , id ,conn, message,`${numerodono}@s.whatsapp.net`,"0000000_1")
-        }
-       }
-
+   
 
 
     gerencia(msg , id ,conn, message,numero_cll)
@@ -93,4 +101,7 @@ const isEstrangero = await antfake_v(id,message)
     
     /*-----------------------------------------------------------------------*/
     
-    module.exports = { very }
+    module.exports = { 
+        very,
+        very2
+     }

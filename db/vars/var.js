@@ -207,7 +207,7 @@ const on_off_antfake = async(id,conn,state) =>{
     })
   }
   
-        await conn.sendMessage (id, 'Anti Link: ON', MessageType.text)
+        await conn.sendMessage (id, 'Anti Fake: ON', MessageType.text)
       }
     }
 

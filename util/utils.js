@@ -24,8 +24,9 @@ const veriAdm = async (id,conn,numero) => {
             i.isAdmin ? adms.push(i.jid) : ''
         }
     const isAdm = adms.includes(numero+"@s.whatsapp.net")===true
-
+console.log("o numero "+numero+" e adm? "+ isAdm)
         return isAdm
+
   }
 
 const getUsers = async (id , conn) => {

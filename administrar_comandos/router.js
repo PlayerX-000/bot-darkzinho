@@ -36,10 +36,9 @@ array_comandos.adm_grupo = adm_grupo;
 
 /*-----------------------------------------------------------------------*/
 
-  const gerencia = async (msg , id ,conn, message,numero_cll,cod) => {
-    const tel = (message.participant).replace("@s.whatsapp.net","");
-  
- await updateMessage(tel,1,0)
+  const gerencia = async (msg , id ,conn, message,numeroUser,cod) => {
+
+ await updateMessage(numeroUser,1,0)
 
 const array_msg = msg.split(" ")
 
@@ -52,8 +51,8 @@ const isComando = comandos.includes(`${comando}`)
  
  /*logs_caht_update(comando , id)*/
 
- await updateMessage(tel,1,1)
- array_comandos[comando](id, conn, array_msg[ind+1], message,numero_cll,cod);
+ await updateMessage(numeroUser,1,1)
+ array_comandos[comando](id, conn, array_msg[ind+1], message,numeroUser,cod);
 
 }
  }
