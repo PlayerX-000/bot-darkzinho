@@ -30,13 +30,13 @@ const criacad_user = await Users.create({
 .catch(err=>{
 return[false,err]
 })
-        return [true,"cadastro feito com SUCESSO"]
+        return [true,"𝙘𝙖𝙙𝙖𝙨𝙩𝙧𝙤 𝙛𝙚𝙞𝙩𝙤 𝙘𝙤𝙢 𝙎𝙐𝘾𝙀𝙎𝙎𝙊"]
 
     
 
 
 }else{
-let res = ["null","Você ja esta cadastrado"]
+let res = ["null","𝙑𝙤𝙘ê 𝙟𝙖 𝙚𝙨𝙩𝙖 𝙘𝙖𝙙𝙖𝙨𝙩𝙧𝙖𝙙𝙤"]
 return res
 }
 

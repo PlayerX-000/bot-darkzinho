@@ -33,9 +33,9 @@ const busca =  await Users.findAll({
   if(busca[0]===undefined){
     console.log(busca)
    return [null,`O ${tel}
-não esta cadastrado
-*Cadastre-se*
-Ex: !cadastro`]
+⚜️⚇🔎𝙣ã𝙤 𝙚𝙨𝙩𝙖 𝙘𝙖𝙙𝙖𝙨𝙩𝙧𝙖𝙙𝙤 🔎.⚉⚜️
+⚜️⚇ ⚠️*𝘾𝙖𝙙𝙖𝙨𝙩𝙧𝙚-𝙨𝙚*⚠️ ⚉⚜️
+⚜️⚇   𝙀𝙭: !𝙘𝙖𝙙𝙖𝙨𝙩𝙧𝙤 ⚉⚜️`]
 
   }else{
     const atk = busca[0].dataValues.atk
